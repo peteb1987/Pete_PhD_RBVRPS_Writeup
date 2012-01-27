@@ -1,0 +1,542 @@
+\documentclass[journal]{IEEEtran}
+
+\usepackage{ifpdf}
+ \ifpdf
+   % pdf code
+ \else
+   % dvi code
+ \fi
+\usepackage{cite}
+\ifCLASSINFOpdf
+  \usepackage[pdftex]{graphicx}
+   %\graphicspath{{../pdf/}{../jpeg/}}
+   \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  \usepackage[dvips]{graphicx}
+  %\graphicspath{{../eps/}}
+  \DeclareGraphicsExtensions{.eps}
+\fi
+\usepackage[cmex10]{amsmath}
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage{mdwmath}
+\usepackage{mdwtab}
+\usepackage{eqparbox}
+\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage{fixltx2e}
+\usepackage{url}
+\usepackage{color}
+
+\newenvironment{meta}[0]{\color{red} \em}{}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+
+\title{The Rao-Blackwellised \\ Variable Rate Particle Smoother for \\ Conditionally Linear-Gaussian Models}
+
+\author{Pete~Bunch,~\IEEEmembership{}
+        Simon~Godsill,~\IEEEmembership{Member,~IEEE,}% <-this % stops a space
+\thanks{P. Bunch and S. Godsill are with the Department
+of Engineering, Cambridge University, UK. email: \{pb404,sjg30\}@cam.ac.uk}% <-this % stops a space
+\thanks{Manuscript received January 01, 1901; revised January 02, 1901.}}
+
+% The paper headers
+\markboth{IEEE Transaction in Signal Processing,~Vol.~1, No.~1, January~1901}%
+{Bunch \& Godsill \MakeLowercase{\textit{et al.}}: The Rao-Blackwellised Variable Rate Particle Smoother for Conditionally Linear-Gaussian Models}
+
+% make the title area
+\maketitle
+
+\begin{abstract}
+The abstract goes here.
+\end{abstract}
+
+\begin{IEEEkeywords}
+
+\end{IEEEkeywords}
+
+
+
+\section{Introduction}
+\IEEEPARstart{I}{n} model-based schemes for probabilistic inference, some unknown quantity is treated as a random process which evolves over time according to a dynamic model. This latent state is observed at a discrete set of times via another random process modelling the measurement mechanism. Using the two models and applying Bayes rule, inference of the hidden state can be made from the observations.
+
+For simple models with linear dynamics and Gaussian-distributed random variables, optimal analytic inference algorithms exist, including the Kalman filter \cite{Kalman1960} and Rauch-Tung-Striebel (RTS) smoother \cite{Rauch1965}. For nonlinear, non-Gaussian models, such analytic solutions do not exist, and it is often necessary to employ numerical approximations, including the particle filter \cite{Gordon1993} and particle smoother \cite{Doucet2000a,Godsill2004} (see \cite{Cappe2007,Doucet2009} for a thorough introduction to particle methods).
+
+Commonly, the unknown quantity under consideration is continually varying -- e.g. the position of a moving object -- but is modelled as a discrete-time random process synchronous with the observations. This leads to the standard discrete-time hidden Markov model. Such ``fixed rate'' models are poorly suited to quantities with discontinuities in their evolution. For example, the price of a financial asset which may display large jumps at random times between periods of diffusion-like behaviour, or the kinematic state of a manoeuvring vehicle which may have sudden jumps in the acceleration when turns begin or end. In such cases, a ``variable rate'' model may be more appropriate, in which the state evolution is dependent upon a set of unknown changepoints.
+
+The discontinuous nature of variable rate models makes them inherently nonlinear. However, in some cases, some subset of the state may behave according to linear-Gaussian dynamics when conditioned on the set of random changepoints and remaining nonlinear components of the state. Such models have been introduced in \cite{Godsill2007a,Christensen2012}, along with an algorithm for conducting sequential inference of both the changepoints and state. This uses the method of Rao-Blackwellisation (see, e.g. \cite{Casella1996,Doucet2000}) to exploit the conditionally linear-Gaussian structure of the model. A particle filter is used to estimate the distribution of the changepoint times and nonlinear state variables, after which a Kalman filter is used to estimate the linear state for each particle. This is the Rao-Blackwellised variable rate particle filter (RBVRPF).
+
+In this paper, a new algorithm is described for use with conditioanlly linear-Gaussian variable rate models for estimation of the smoothing distribution, i.e. the distribution over the sequence of states given all the observations. This uses a similar derivation to that of the fixed rate Rao-Blackwellised particle smoother (RBPS) of \cite{Sarkka2012}. The new algorithm is called the Rao-Blackwellised variable rate particle smoother (RBVRPS).
+
+We review the structure of conditionally linear-Gaussian variable rate models in section~\ref{sec:rbvr_models} and revise the RBVRPF in section~\ref{sec:rbvrpf}, using a new notation to clarify the derivations. The new smoothing algorithm is presented in section~\ref{sec:rbvrps} with supporting simulations in section~\ref{sec:simulations}.
+
+
+
+\section{Conditionally Linear-Gaussian Variable Rate Models} \label{sec:rbvr_models}
+
+The notation associated with variable rate models can become convoluted because the observations and changepoints are not concurrent.
+
+We consider a general model from time $0$ to $T$, between which observations, $\{y_1 \dots y_N\}$, are made at times $\{t_1 \dots t_N\}$. The linear state at these times is written as $\{x_1 \dots x_N\}$. During this period, an unknown number, $K$, of changepoints occur at times $\{ \tau_1 \dots \tau_K \}$, each with an associated changepoint parameters, $\{ u_1 \dots u_K \}$. Discrete sets containing multiple values over time will be written as, e.g. $y_{1:n} = \{y_1 \dots y_n\}$. To keep the following derivations concise, we introduce an additional variable for each changepoint-parameter pair $\theta_k = \{\tau_k, u_k\}$.
+
+It will be desirable to denote the set of changepoints and parameters (of unspecified size) which occur within some range of time. This will be written as $\theta_{[s,t]} = \{ \theta_k \forall k : s<\theta_k<t \}$. Note that such a variable not only conveys where changepoints occur, but also where they do not within the specfied range.
+
+A conditionally linear-Gaussian variable rate model can now be expressed by the following system equations:
+
+\begin{IEEEeqnarray}{rCl}
+ \theta_k & \sim & p(\theta_k|\theta_{1:k-1}) \label{eq:cp_model} \\
+ x_n & = & A(\theta_{[0,t_n]})x_{n-1} + w_n \\
+ y_n & = & C(\theta_{[0,t_n]})x_n + v_n  .
+\end{IEEEeqnarray}
+
+The random variables $w_n$ and $v_n$ have a zero-mean Gaussian distribution with covariance matrices $Q_n$ and $R_n$ respectively.
+
+Thus, if $\theta_{[0,T]}$ is given, the filtering distributions, $p(x_n|\theta_{[0,t_n]}, y_{1:n})$, and smoothing distributions, $p(x_n|\theta_{[0,T]}, y_{1:N})$, can be calculated optimally using a Kalman filtering and smoothing methods (see e.g. \cite{Anderson1979}). It remains to use a particle filter or smoother to estimate $\theta_{[0,T]}$.
+
+
+
+\section{The Rao-Blackwellised Variable Rate Particle Filter} \label{sec:rbvrpf}
+
+The Rao-Blackwellised Variable Rate Particle Filter (RBVRPF) was first described in \cite{Godsill2007a}, and in \cite{Christensen2012} it was developed for use in a financial prediction algorithm.
+
+The objective of the algorithm is to sequentially estimate the distribution of the variable rate componentes, $p(\theta_{[0,t_n]}| y_{1:n})$, at each time $t_n$. The linear state filtering distribution, $p(x_n|\theta_{[0,t_n]}, y_{1:n})$, can then be estimated by a Kalman filter.
+
+The target distribution may be expanded using Bayes theorem.
+
+\begin{IEEEeqnarray}{rCl}
+ p(\theta_{[0,t_n]}|y_{1:n}) & \propto & P(y_{n}|\theta_{[0,t_n]}, y_{1:n-1}) p(\theta_{[0,t_n]}|y_{1:n-1}) \nonumber \\
+                                        & =       & p(y_{n}|\theta_{[0,t_n]}, y_{1:n-1}) p(\theta_{[t_{n-1},t_n]}|\theta_{[0,t_{n-1}]}) p(\theta_{[0,t_{n-1}]}|y_{1:n-1})
+\end{IEEEeqnarray}
+
+This distribution cannot be calculated analytically due to the combinatorial complexity of the possible numbers, positions and parameters of changepoints. Instead, a particle filter can be used to approximate the distribution numerically.
+
+A particle filter is an algorithm used to approximate a filtering density with a discrete set of weighted samples drawn from that density using sequential importance sampling. For details, see e.g. \cite{Cappe2007,Doucet2009}. In this case, each particle will consist of list of changepoint times between $0$ and $t$.
+
+\begin{equation}
+ \hat{p}(\theta_{[0,t_n]}|y_{1:n}) = \sum_i w_n^{(i)} \delta_{\theta_{[0,t_n]}^{(i)}}(\theta_{[0,t_n]})
+\end{equation}
+
+where $\delta_x(X)$ is a probability mass at the point where $X=x$.
+
+The particle filter is a recursive algorithm. At the $(n)th$ step, a particle, $\{\theta_{[0,t_{n-1}]}^{(i)}\}$, is first resampled from those approximating the filtering distribution at the $(n-1)th$ step, using an arbitrary set of proposal weights.
+
+\begin{IEEEeqnarray}{rCl}
+q(\theta_{[0,t_{n-1}]}^{(i)}|y_{1:n-1}) = \sum_i v_{n-1}^{(i)} \delta_{\theta_{[0,t_{n-1}]}^{(i)}}(\theta_{[0,t_{n-1}]})
+\end{IEEEeqnarray}
+
+An extension, $\{\theta_{[t_{n-1},t_n]}\}$, is then proposed from an importance distribution, $q(\theta_{[t_{n-1},t_n]}|\theta_{[0,t_{n-1}]})$. Finally, the particle is weighted according to the ratio of the target distribution and the proposal.
+
+\begin{IEEEeqnarray}{rCl}
+w_n^{(i)} & = & \frac{ p(\theta_{[0,t_n]}^{(i)}|y_{1:n}) }{ q(\theta_{[0,t_{n-1}]}^{(i)}|y_{1:{n-1}}) q(\theta_{[t_{n-1},t_{n}]}^{(i)}|\theta_{[0,t_{n-1}]}^{(i)}) } \nonumber \\
+    & \propto & \frac{ p(y_{n}|\theta_{[0,t_n]}^{(i)}, y_{1:n-1}) p(\theta_{[t_{n-1},t_n]}^{(i)}|\theta_{[0,t_{n-1}]}^{(i)}) p(\theta_{[0,t_{n-1}]}^{(i)}|y_{1:n-1}) }{ q(\theta_{[0,t_{n-1}]}^{(i)}|y_{1:{n-1}}) q(\theta_{[t_{n-1},t_{n}]}^{(i)}|\theta_{[0,t_{n-1}]}^{(i)}) } \nonumber \\
+    & \approx & \frac{w_{n-1}^{(i)}}{v_{n-1}^{(i)}} \times \frac{ p(y_{n}|\theta_{[0,t_n]}^{(i)}, y_{1:n-1}) p(\theta_{[t_{n-1},t_n]}^{(i)}|\theta_{[0,t_{n-1}]}^{(i)}) }{ q(\theta_{[t_{n-1},t_{n}]}|\theta_{[0,t_{n-1}]}) } \label{eq:RBVRPF_weights}
+\end{IEEEeqnarray}
+
+The normalisation may be enforced by scaling the weights so that they sum to $1$. This is the RBVRPF of \cite{Godsill2007a,Christensen2012}.
+
+Now consider terms of \ref{eq:RBVRPF_weights} in turn. First, $p(y_{n}|\theta_{[0,t_n]}, y_{1:n-1})$ is the predictive likelihood estimated by the Kalman filter, which will be a Gaussian distributed.
+
+\begin{equation}
+ p(y_{n}|\theta_{[0,t_n]}, y_{1:n-1}) = \mathcal{N}(y_n|\mu_n, S_n)
+\end{equation}
+
+The mean and variance are given by the following standard recursions (dependence on $\theta_{[0,t_{n}]}$ suppressed for clarity).
+
+\begin{IEEEeqnarray}{rCl}
+ m_n^- & = & A_n m_{n-1} \label{eq:RBVRPF_KF_pred_start} \\
+ P_n^- & = & A_n P_n A_n^T + Q_n \\
+ \mu_n & = & C_n m_n^- \\
+ S_n   & = & C_n P_n^- C_n^T + R_n \label{eq:RBVRPF_KF_pred_stop} \\
+ K_n   & = & P_n^- C_n^T S_n^{-1} \label{eq:RBVRPF_KF_update_start} \\
+ m_n   & = & m_n^- + K_n (y_n - \mu_n) \\
+ P_n   & = & P_n^- - K_n S_n K_n^T \label{eq:RBVRPF_KF_update_stop}
+\end{IEEEeqnarray}
+
+Next consider the transition term $p(\theta_{[t_{n-1},t_n]}|\theta_{[0,t_{n-1}]})$. Technically, any number of new changepoints could occur in the interval $[t_{n-1},t_n]$. If $k$ changepoints have occured before $t_{n-1}$, then the probability of a particuar set of changepoints within this interval is given by:
+
+\begin{IEEEeqnarray}{rCl}
+ \IEEEeqnarraymulticol{3}{l}{p(\theta_{[t_{n-1},t_n]}|\theta_{[0,t_{n-1}]})} \nonumber \\
+ \qquad & = & \prod_{j=1}^{J} p(\theta_{k+j}|\theta_{1:k+j-1}, \tau_{k+1}>t_{n-1}) p(\tau_{k+J+1}>t_n|\theta_{1:k+J}, \tau_{k+1}>t_{n-1})
+\end{IEEEeqnarray}
+
+where $J$ is the number of changepoints occuring in the interval. Practically, the probability of $J$ being larger than $1$ is small; if changepoints were occurring this often then there would be little point in using a variable rate model! Thus, there are two significant cases: either a new changepoint occurs in the interval $[t_{n-1},t_n]$ or it does not. The transition probability then simplifies to:
+
+\begin{IEEEeqnarray}{rCl}
+ p(\theta_{[t_{n-1},t_n]}|\theta_{[0,t_{n-1}]}) & = & \begin{cases}p(\theta_{k+1}|\theta_{1:k}, \tau_{k+1}>t_{n-1}) p(\tau_{k+2}>t_n|\theta_{1:k+1}) & \tau_{k+1}<t_n \\ p(\tau_{k+1}>t_n|\theta_{1:k}, \tau_{k+1}>t_{n-1}) & \tau_{k+1}<t_n \end{cases} \\
+ & = & \begin{cases}\frac{ p(\theta_{k+1}|\theta_{1:k}) p(\tau_{k+2}>t_n|\theta_{1:k+1}) }{ p(\tau_{k+1}>t_{n-1}|\theta_{1:k}) } & \tau_{k+1}<t_n \\ \frac{ p(\tau_{k+1}>t_{n}|\theta_{1:k}) }{ p(\tau_{k+1}>t_{n-1}|\theta_{1:k}) } & \tau_{k+1}<t_n \end{cases}
+\end{IEEEeqnarray}
+
+This can be calculated from transition model for $\tau_k$ and $u_k$ specified by \ref{eq:cp_model}. For the most basic ``bootstrap'' \cite{Gordon1993} form of RBVRPF, this transition density may be used as the importance distribution, leading to the usual simplification in the weight formula.
+
+The choice of proposal weights, $\{v_{n-1}^{(i)}\}$, requires particular attention in the design of RBVRPFs. In some models a changepoint may not have an immediate effect on the observations, especially if a jump occurs in some quantity which is only observed via its integral, e.g. if there is a jump in the acceleration of a moving object, yet only the position is measured, the change will not be apparent until several more observations have been made. In the meantime, particles which contain a changepoint at the correct time may all have been removed by the resampling process. A particle pays a debt in transition probability when a changepoint is proposed, and does not see it repaid in likelihood until later. To avoid this loss of good particles, proposal weights should be chosen which preserve a significant number of low-weight particles. One scheme which has been found to work well is described in \cite{Godsill2007}, in which proposal weights are given by:
+
+\begin{IEEEeqnarray}{rCl}
+v_{n-1}^{(i)} & \propto & \max ( 1, N_F w_{n-1}^{(i)} )
+\end{IEEEeqnarray}
+
+where $N_F$ is the number of filtering particles. The RBVRPF is summarised below.% in algorithm~\ref{alg:RBVRPF}.
+
+%\begin{algorithm}
+\begin{algorithmic}
+\STATE Set initial particle sufficient statistics, $\{m_0^{(i)}\}$ and $\{P_0^{(i)}\}$ according to prior.
+\STATE Initialise particles $\{\theta_{[0,0]}^{(i)}\} \gets \emptyset$.
+\FOR{n=1 \dots N}
+  \FOR{i=1 \dots M}
+  	\STATE Sample a changepoint history $\theta_{[0,t_{n-1}]}^{(i)} \sim \sum_j v_{n-1}^{(j)} \delta_{\theta_{[0,t_{n-1}]}^{(j)}}(\theta_{[0,t_{n-1}]})$.
+    \STATE Propose $\theta_{[t_{n-1},t_n]}^{(i)} \sim q(\theta_{[t_{n-1},t_n]}|\theta_{[0,t_{n-1}]}^{(i)}, y_{1:n})$
+    \STATE Calculate $\mu_n^{(i)}$ and $S_n^{(i)}$ using (\ref{eq:RBVRPF_KF_pred_start})~to~(\ref{eq:RBVRPF_KF_pred_stop}).
+    \STATE Calculate new state mean and covariance $m_n^{(i)}$ and $P_n^{(i)}$ using (\ref{eq:RBVRPF_KF_update_start})~to~(\ref{eq:RBVRPF_KF_update_stop}).
+    \STATE Weight $w_n^{(i)} \propto \frac{w_{n-1}^{(i)}}{v_{n-1}^{(i)}} \times \frac{ \mathcal{N}(y_n|\mu_n^{(i)}, S_n^{(i)}) p(\theta_{[t_{n-1},t_n]}^{(i)}|\theta_{[0,t_{n-1}]}^{(i)}) }{ q(\theta_{[t_{n-1},t_{n}]}|\theta_{[0,t_{n-1}]}) }$
+  \ENDFOR
+  \STATE Scale weights such that $\sum_i w_n^{(i)}=1$
+\ENDFOR
+\end{algorithmic}
+%\label{alg:RBVRPF}
+%\caption{Rao-Blackwellised Variable Rate Particle Filter}
+%\end{algorithm}
+
+
+
+\section{The Rao-Blackwellised Variable Rate Particle Smoother} \label{sec:rbvrps}
+
+Estimating changepoints online is a challenging task because the presence of a change may not be obvious until after it has happened. It is thus expected that a smoothing algorithm will provide significantly improved performance at changepoint estimation. In this section, the same Rao-Blackwellisation method is used to develop a particle smoother for variable rate models with linear-Gaussian state dynamics (RBVRPS). The derivation follows a similar course to that for the fixed rate Rao-Blackwellised Particle Smoother of \cite{Sarkka2012}.
+
+The particles of the final filtering step approximate the distribution, $p(\theta_{[0,T]}|y_{1:N})$, which is desired smoothing distribution. However, in the same manner as the fixed rate filter-smoother of \cite{Kitagawa1996}, this approximation is likely to be degenerate -- the particles all share the same set of changepoints from early times, with variation only appearing for changepoints close to $T$. For a good characterisation of the smoothing distribution, it is necessary to rejeuventate the set of particles. This is achieved with a backward pass through the observations in a similar manner to the methods described in \cite{Godsill2004,Sarkka2012}.
+
+The target smoothing distribution may be expanded with Bayes rule.
+
+\begin{IEEEeqnarray}{rCl}
+ p(\theta_{[0,T]}|y_{1:N}) = p(\theta_{[t_n,T]}|y_{1:N}) p(\theta_{[0,t_n]}|\theta_{[t_n,T]}, y_{1:N})
+\end{IEEEeqnarray}
+
+Thus, a set of particles representing $p(\theta_{[t_n,T]}|y_{1:N})$ may be extended backwards by sampling from the backwards conditional distribution, $p(\theta_{[0,t_n]}|\theta_{[t_n,T]}, y_{1:N})$, which may be approximated by reweighting the partilce of the $(n)th$ filtering distribution. The resulting particles are then marginalised by discarding the changepoints which come before $t_{n-1}$ (which will still be suffering from low particle diversity), and the procedure continues recursively.
+
+If the future changepoints and their parameters, $\tilde{\theta}_{[t_n,T]}$, have already been sampled (and may thus be considered fixed), then the backward conditional term may be expressed in terms of the filtering distribution.
+
+\begin{IEEEeqnarray}{rCl}
+ \IEEEeqnarraymulticol{3}{l}{p(\theta_{[0,t_n]}|\tilde{\theta}_{[t_n,T]}, y_{1:N})} \nonumber \\
+\qquad & \propto & p(\theta_{[0,t_n]}, \tilde{\theta}_{[t_n,T]}| y_{1:N}) \nonumber  \\
+       & =       & \int p(x_n, \theta_{[0,t_n]}, \tilde{\theta}_{[t_n,T]}| y_{1:N}) dx_n \nonumber  \\
+       & \propto & \int p(y_{n+1:N}|x_n, \theta_{[0,t_n]}, \tilde{\theta}_{[t_n,T]}, y_{1:n}) p(x_n, \theta_{[0,t_n]}, \tilde{\theta}_{[t_n,T]}| y_{1:n}) dx_n \nonumber \\
+       & = & \int p(y_{n+1:N}|x_n, \theta_{[0,t_n]}, \tilde{\theta}_{[t_n,T]}) p(x_n|\theta_{[0,t_n]}, y_{1:n}) dx_n p(\tilde{\theta}_{[t_n,T]}|\theta_{[0,t_n]}) p(\theta_{[0,t_n]}|y_{1:n})
+\end{IEEEeqnarray}
+
+Finally, the RBVRPF approximation is substituted for the filtering distribution.
+
+\begin{IEEEeqnarray}{rCl}
+ \IEEEeqnarraymulticol{3}{l}{p(\theta_{[0,t_n]}|\tilde{\theta}_{[t_n,T]}, y_{1:N})} \nonumber \\
+\qquad & \propto & \sum_i W_{n}^{(i)} \int p(y_{n+1:N}|x_n, \theta_{[0,t_n]}^{(i)}, \tilde{\theta}_{[t_n,T]}) p(x_n|\theta_{[0,t_n]}^{(i)}, y_{1:n}) dx_n p(\tilde{\theta}_{[t_n,T]}|\theta_{[0,t_n]}^{(i)}) \delta_{\theta_{[0,t_n]}^{(i)}}(\theta_{[0,t_n]}) \nonumber \\
+ & = & \sum_i \tilde{w}_{n}^{(i)} \delta_{\theta_{[0,t_n]}^{(i)}}(\theta_{[0,t_n]})
+\end{IEEEeqnarray}
+
+where the backwards conditional weights are given by
+
+\begin{IEEEeqnarray}{rCl}
+ \tilde{w}_n \propto \int p(y_{n+1:N}|x_n, \theta_{[0,t_n]}^{(i)}, \tilde{\theta}_{[t_n,T]}) p(x_n|\theta_{[0,t_n]}^{(i)}, y_{1:n}) dx_n p(\tilde{\theta}_{[t_n,T]}|\theta_{[0,t_n]}^{(i)})
+\label{eq:RBVRPS_back_cond_weight}
+\end{IEEEeqnarray}
+
+As before, normalisation is enforced by scaling the weights so that they sum to $1$.
+
+If $k$ changepoints occur before time $t_n$, then the changepoint transition term $p(\tilde{\theta}_{[t_n,T]}|\theta_{[0,t_n]}^{(i)})$ may be expressed as:
+
+\begin{IEEEeqnarray}{rCl}
+ p(\tilde{\theta}_{[t_n,T]}|\theta_{[0,t_n]}^{(i)}) &=& p(\tilde{\theta}_{k+1:K}|\theta_{1:k}, \tau_{k+1}>t_n)
+\end{IEEEeqnarray}
+ 
+For a Markovian sequence of changepoints, this is simply proportional to the probability of the first changepoint after $t_n$ given the last changepoint preceeding $t_n$, i.e.
+
+\begin{IEEEeqnarray}{rCl}
+ P(\tilde{\theta}_{[t_n,T]}|\theta_{[0,t_n]}^{(i)}) &\propto& P(\tilde{\theta}_{k+1}|\theta_k, \tau_{k+1}>t_n)
+\end{IEEEeqnarray}
+
+The second term in equation~\ref{eq:RBVRPS_back_cond_weight} is the familiar Kalman filter distribution $P(x_n|\theta_{[0,t_n]}^{(i)}, y_{1:n}) = \mathcal{N}(x_n|m_n^{(i)}, P_n^{(i)})$. The first term, $p(y_{n+1:N}|x_n, \theta_{[0,t_n]}^{(i)}, \tilde{\theta}_{[t_n,T]})$, is an improper likelihood density, and may be calculated analytically using a backwards Kalman filter, in a similar manner to that used in the two-filter smoother \cite{Fraser1969,Anderson1979,Sarkka2012}. Such a backwards Kalman filter uses the following recursions. Details are provided in \ref{app:backward_filter}, and in the aforesaid references.
+
+\begin{equation}
+ p(y_{n+1:N}|x_n, \theta_{[0,t_n]}^{(i)}, \tilde{\theta}_{[t_n,T]}) = Z_n \mathcal{N}(x_n|\tilde{m}_n, \tilde{P}_n)
+\end{equation}
+
+\begin{IEEEeqnarray}{rCl}
+ \tilde{m}_n^- & = & A_{n+1}^{-1} \tilde{m}_{n+1} \label{eq:RBVRPS_backward_KF_start} \\
+ \tilde{P}_n^- & = & A_{n+1}^{-1} (\tilde{P}_{n+1} + Q_{n+1}) A_{n+1}^{-T} \\
+ \tilde{\mu}_n & = & C_n \tilde{m}_n^- \\
+ \tilde{S}_n   & = & C_n \tilde{P}_n^- C_n^T + R_n \\
+ \tilde{K}_n   & = & \tilde{P}_n^- C_n^T \tilde{S}_n^{-1} \\
+ \tilde{m}_n   & = & \tilde{m}_n^- + \tilde{K}_n (y_n - \tilde{\mu}_n) \\
+ \tilde{P}_n   & = & \tilde{P}_n^- - \tilde{K}_n \tilde{S}_n \tilde{K}_n^T \label{eq:RBVRPS_backward_KF_end}
+\end{IEEEeqnarray}
+
+Substituting into equation~\ref{eq:RBVRPS_back_cond_weight}, the backwards conditional weights are given by:
+
+\begin{equation}
+ \tilde{w}_n \propto p(\theta_{[t_n,T]}|\theta_{[0,t_n]}^{(i)}) \mathcal{N}(\tilde{m}_n^-|m_n, \tilde{P}_n^- + P_n)
+\label{eq:RBVRPS_back_cond_weight2}
+\end{equation}
+
+Samples of $\theta_{[0,t_n]}$ may be drawn from this particle distribution. Once sampling has progressed backwards from $n=N \dots 1$, a complete particle from the smoothing distribution has been generated. This procedure may then be repeated until sufficient particles have been obtained. The procedure is summarised below.% in algoritm~\ref{alg:RBVRPS}.
+
+%\begin{algorithm}
+\begin{algorithmic}
+  \STATE Run Rao-Blackwellised particle filter to approximate $p(\theta_{[0,t_n]}|y_{1:n})$ with particles $\theta_{[0,t_n]}^{(i)}$ and associated Gaussian moments $m_{n}^{(i)}$ and $P_{n}^{(i)}$.
+  \FOR{$i=1 \dots N_S$}
+    \FOR{$n=N \dots 1$}
+      \STATE Backwards Kalman filter: Calculate $\tilde{m}_n^{-(i)}$ and $\tilde{P}_n^{-(i)}$ using \ref{eq:RBVRPS_backward_KF_start} to \ref{eq:RBVRPS_backward_KF_end}.
+      \FOR{$j=1 \dots N_P$}
+	      \STATE $\tilde{w}_n^{(j)} \propto w_n^{(j)} p(\theta_{[t_n,T]}|\theta_{[0,t_n]}^{(j)}) \mathcal{N}(\tilde{m}_n^{-(j)}|m_n, \tilde{P}_n^{-(j)} + P_n)$
+      \ENDFOR
+      \STATE Sample $\tilde{\theta}_{[0,t_n]}^{(i)} \sim \sum_j \tilde{w}_n^{(j)} \delta_{\theta_{[0,t_n]}^{(j)}}(\theta_{[0,t_n]})$
+      \STATE Discard $\tilde{\theta}_{[0,t_{n-1}]}^{(i)}$
+    \ENDFOR
+  \ENDFOR
+\end{algorithmic}
+%\caption{Rao-Blackwellised Variable Rate Particle Smoother}
+%\label{alg:RBVRPS}
+%\end{algorithm}
+
+
+
+\section{Simulations} \label{sec:simulations}
+
+The RBVRPS algorithm was tested on the financial time series model of \cite{Godsill2007a,Christensen2012}, in which prices of a asset are treated as noisy observations of a latent state, which evolves according to a drift-diffusion with occasional jumps. 
+
+The latent state is a vector with two elements, the underlying value of the asset, and the trend followed by this value.
+
+\begin{equation}
+ \mathbf{x}_n = [ x_n, \dot{x}_n]^T
+\end{equation}
+
+This evolves continuously according to a drift-diffusion model:
+
+\begin{IEEEeqnarray}{c}
+ d\mathbf{x}_t = \begin{bmatrix}0 & 1 \\ 0 & -\lambda \end{bmatrix} \mathbf{x}_t dt + \begin{bmatrix}0 \\ \sigma \end{bmatrix} d\mathbf{\beta}(t)
+\end{IEEEeqnarray}
+
+where $\lambda$ introduces a mean regression effect on the trend and $\mathbf{\beta}(t)$ is standard brownian motion (with unit diffusion constant).
+
+In addition, the state experiences jumps at random times, $\{\tau_k\}$. Two types of jumps occur: value jumps, indicated by $u_k = 1$, and trend jumps, indicated by $u_k=2$. The magnitudes of jumps are zero-mean Gaussian-distributed with standard deviation $\sigma_{J1}$ and $\sigma_{J2}$ respectively. This model may be discretised at the observation times by matrix fraction decomposition (see e.g. \cite{Sarkka2006}\begin{meta}Not sure what to cite here. Simo's thesis? Or the references therein which I've never seen?\end{meta}). Assuming Gaussian observation noise with standard deviation $\sigma_y^2$, the resulting discrete time dynamics are described by the following equations (see \ref{app:model_discretisation}):
+
+\begin{IEEEeqnarray}{rCl}
+ \mathbf{x}_n &=& A \mathbf{x}_{n-1} + \mathbf{w}_n \\
+ y_n &=& C \mathbf{x}_{n} + v_n
+\end{IEEEeqnarray}
+
+where the $\mathbf{w}_b$ and $v_n$ are Gaussian random variables with covariance matrixes $Q_n$ and $R$ resepectively.
+
+\begin{IEEEeqnarray}{rCl}
+ A               &=& \begin{bmatrix}1 & \frac{1}{\lambda}(1-e^{(-\lambda T)} \\ 0 & e^{(-\lambda T)}\end{bmatrix} \\
+ C               &=& \begin{bmatrix}1 & 0\end{bmatrix} \\
+ Q_n             &=& \begin{cases}Q_{\text{diff}} + Q_{\text{jump}} & \exists k : \tau_k \in [t_{n-1},t_n]\\ 
+                                  Q_{\text{diff}} & \text{otherwise} \end{cases} \\
+ 																	Q_{\text{jump}} &=& \begin{cases} \begin{bmatrix}\sigma_{J1}^2 & 0 \\ 0 & 0 \end{bmatrix} & u_k = 1 \\
+ 																	                                  \begin{bmatrix}0 & 0 \\ 0 & \sigma_{J2}^2 \end{bmatrix} & u_k = 2  \end{cases} \\
+ %Q_{\text{diff}} &=& \begin{bmatrix}\sigma_1^2 T + \frac{\sigma_2^2}{2\lambda^2}(-3 + 2 \lambda T + 4 e^{(-\lambda T)} - e^{(-2 \lambda T)}) & \frac{\sigma_2^2}{2 \lambda^2} (1-e^{(-\lambda T)})^2 \\ \frac{\sigma_2^2}{2 \lambda^2} (1-e^{(-\lambda T)})^2 & \frac{\sigma_2^2}{2 \lambda} (1-e^{(-2 \lambda T)})\end{bmatrix} \IEEEeqnarraynumspace	\\
+ Q_{\text{diff}} &=& \frac{\sigma^2}{2 \lambda}\begin{bmatrix} \frac{1}{\lambda^2}(2 \lambda T - (3 - e^{(-\lambda T)})(1 - e^{(-\lambda T)}) & \frac{1}{\lambda} (1-e^{(-\lambda T)})^2 \\ \frac{1}{\lambda} (1-e^{(-\lambda T)})^2 & 1-e^{(-2 \lambda T)}\end{bmatrix} \IEEEeqnarraynumspace	\\
+ R               &=& [\sigma_y^2]
+\end{IEEEeqnarray}
+
+This model fits nicely into the Rao-Blackwellised variable rate filtering and smoothing schemes.
+
+The algorithms were first tested on artificial data simulated from the model.
+
+
+
+% Template bits
+
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+% Note that IEEEtran v1.7 and later has special internal code that
+% is designed to preserve the operation of \label within \caption
+% even when the captionsoff option is in effect. However, because
+% of issues like this, it may be the safest practice to put all your
+% \label just after \caption rather than within \caption{}.
+%
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
+% option should be used if it is desired that the figures are to be
+% displayed while in draft mode.
+%
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation Results}
+%\label{fig_sim}
+%\end{figure}
+
+% Note that IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+
+
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command, the
+% \label for the overall figure must come after \caption.
+% \hfil must be used as a separator to get equal spacing.
+% The subfigure.sty package works much the same way, except \subfigure is
+% used instead of \subfloat.
+%
+%\begin{figure*}[!t]
+%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
+%\label{fig_second_case}}}
+%\caption{Simulation results}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+
+
+% An example of a floating table. Note that, for IEEE style tables, the 
+% \caption command should come BEFORE the table. Table text will default to
+% \footnotesize as IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+% Note that IEEE does not put floats in the very first column - or typically
+% anywhere on the first page for that matter. Also, in-text middle ("here")
+% positioning is not used. Most IEEE journals use top floats exclusively.
+% Note that, LaTeX2e, unlike IEEE journals, places footnotes above bottom
+% floats. This can be corrected via the \fnbelowfloat command of the
+% stfloats package.
+
+
+
+\section{Conclusion}
+The conclusion goes here.
+
+
+
+
+
+% if have a single appendix:
+%\appendix[Proof of the Zonklar Equations]
+% or
+%\appendix  % for no appendix heading
+% do not use \section anymore after \appendix, only \section*
+% is possibly needed
+
+% use appendices with more than one appendix
+% then use \section to start each appendix
+% you must declare a \section before using any
+% \subsection or using \label (\appendices by itself
+% starts a section numbered zero.)
+%
+
+
+\appendices
+\section{Derivation of the Backwards Kalman Filter}
+Appendix one text goes here.
+
+\section{Model Discretisation}
+Appendix two text goes here.
+
+
+% use section* for acknowledgement
+\section*{Acknowledgment}
+
+
+The authors would like to thank...
+
+
+% Can use something like this to put references on a page
+% by themselves when using endfloat and the captionsoff option.
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+\bibliographystyle{IEEEtran}
+\bibliography{D:/pb404/Dropbox/PhD/OTbib}
+
+% biography section
+% 
+% If you have an EPS/PDF photo (graphicx package needed) extra braces are
+% needed around the contents of the optional argument to biography to prevent
+% the LaTeX parser from getting confused when it sees the complicated
+% \includegraphics command within an optional argument. (You could create
+% your own custom macro containing the \includegraphics command to make things
+% simpler here.)
+%\begin{biography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
+% or if you just want to reserve a space for a photo:
+
+\begin{IEEEbiographynophoto}{Pete Bunch}
+Biography text here.
+\end{IEEEbiographynophoto}
+
+% if you will not have a photo at all:
+\begin{IEEEbiographynophoto}{Simon Godsill}
+Biography text here.
+\end{IEEEbiographynophoto}
+
+% insert where needed to balance the two columns on the last page with
+% biographies
+%\newpage
+
+% You can push biographies down or up by placing
+% a \vfill before or after them. The appropriate
+% use of \vfill depends on what kind of text is
+% on the last page and whether or not the columns
+% are being equalized.
+
+%\vfill
+
+% Can be used to pull up biographies so that the bottom of the last one
+% is flush with the other column.
+%\enlargethispage{-5in}
+
+
+
+% that's all folks
+\end{document}
+
+
