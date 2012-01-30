@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.9)  27 JAN 2012 16:30
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.9)  30 JAN 2012 17:25
 entering extended mode
 **D:/pb404/VariableRateAlgorithms/RBVRPF_Paper/draft2_RBVRPF.tex
 (D:/pb404/VariableRateAlgorithms/RBVRPF_Paper/draft2_RBVRPF.tex
@@ -386,7 +386,7 @@ Overfull \hbox (118.04959pt too wide) in alignment at lines 218--224
  []
 
 
-Overfull \hbox (158.53287pt too wide) in alignment at lines 228--232
+Overfull \hbox (155.12778pt too wide) in alignment at lines 228--232
  [] [] [] [][]
  []
 
@@ -396,22 +396,67 @@ Overfull \hbox (54.46086pt too wide) in alignment at lines 236--239
  []
 
 [3]
-Underfull \hbox (badness 3735) in paragraph at lines 282--283
+Underfull \hbox (badness 3735) in paragraph at lines 284--285
 [] []\OT1/ptm/m/n/10 Run Rao-Blackwellised par-ti-cle fil-ter to ap-prox-i-mate
 
  []
 
 
-Overfull \hbox (56.59091pt too wide) in alignment at lines 327--337
+Overfull \hbox (72.67473pt too wide) in alignment at lines 332--342
  [] [] [] [][]
  []
 
-[4] (D:\pb404\VariableRateAlgorithms\RBVRPF_Paper\draft2_RBVRPF.bbl
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 29.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 29.
+[4] <example_data.pdf, id=30, 433.62pt x 361.35pt>
+File: example_data.pdf Graphic file (type pdf)
+ <use example_data.pdf>
+<example_filter_kdest.pdf, id=31, 433.62pt x 144.54pt>
+File: example_filter_kdest.pdf Graphic file (type pdf)
 
+<use example_filter_kdest.pdf>
+<example_smoother_kdest.pdf, id=32, 433.62pt x 144.54pt>
+File: example_smoother_kdest.pdf Graphic file (type pdf)
+
+<use example_smoother_kdest.pdf>
+<example_filter_state.pdf, id=33, 433.62pt x 289.08pt>
+File: example_filter_state.pdf Graphic file (type pdf)
+
+<use example_filter_state.pdf>
+<example_filtersmoother_state.pdf, id=34, 433.62pt x 289.08pt>
+File: example_filtersmoother_state.pdf Graphic file (type pdf)
+
+<use example_filtersmoother_state.pdf>
+<example_smoother_state.pdf, id=35, 433.62pt x 289.08pt>
+File: example_smoother_state.pdf Graphic file (type pdf)
+
+<use example_smoother_state.pdf>
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 381.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 381.
+ [5 <D:/pb404/VariableRateAlgorithms/RBVRPF_Paper/example_data.pdf> <D:/pb404/V
+ariableRateAlgorithms/RBVRPF_Paper/example_filter_kdest.pdf> <D:/pb404/Variable
+RateAlgorithms/RBVRPF_Paper/example_smoother_kdest.pdf>]
+Overfull \hbox (47.11443pt too wide) in alignment at lines 396--399
+ [] [] [] [][]
+ []
+
+
+Overfull \hbox (30.36598pt too wide) in paragraph at lines 418--426
+[][] 
+ []
+
+<fx_filtersmoother-crop.pdf, id=49, 492.84125pt x 370.38374pt>
+File: fx_filtersmoother-crop.pdf Graphic file (type pdf)
+
+<use fx_filtersmoother-crop.pdf>
+<fx_smoother-crop.pdf, id=50, 492.84125pt x 370.38374pt>
+File: fx_smoother-crop.pdf Graphic file (type pdf)
+
+<use fx_smoother-crop.pdf>
+(D:\pb404\VariableRateAlgorithms\RBVRPF_Paper\draft2_RBVRPF.bbl [6 <D:/pb404/Va
+riableRateAlgorithms/RBVRPF_Paper/example_filter_state.pdf> <D:/pb404/VariableR
+ateAlgorithms/RBVRPF_Paper/example_filtersmoother_state.pdf> <D:/pb404/Variable
+RateAlgorithms/RBVRPF_Paper/example_smoother_state.pdf>]
 Underfull \hbox (badness 4072) in paragraph at lines 37--40
 []\OT1/ptm/m/n/8 N. Gor-don, D. Salmond, and A. Smith, ``Novel ap-proach to
  []
@@ -428,35 +473,37 @@ Underfull \hbox (badness 2318) in paragraph at lines 92--96
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `English'. Using the pattern for
 ** the default language instead.
-) [5] (D:\pb404\VariableRateAlgorithms\RBVRPF_Paper\draft2_RBVRPF.aux) ) 
+) [7 <D:/pb404/VariableRateAlgorithms/RBVRPF_Paper/fx_filtersmoother-crop.pdf> 
+<D:/pb404/VariableRateAlgorithms/RBVRPF_Paper/fx_smoother-crop.pdf>]
+(D:\pb404\VariableRateAlgorithms\RBVRPF_Paper\draft2_RBVRPF.aux) ) 
 Here is how much of TeX's memory you used:
- 3753 strings out of 494019
- 55693 string characters out of 3143883
- 132211 words of memory out of 3000000
- 7001 multiletter control sequences out of 15000+200000
- 44087 words of font info for 81 fonts, out of 3000000 for 9000
+ 3809 strings out of 494019
+ 57079 string characters out of 3143883
+ 132281 words of memory out of 3000000
+ 7048 multiletter control sequences out of 15000+200000
+ 45811 words of font info for 83 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
- 36i,21n,38p,1052b,432s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Pro
-gram Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (
-x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files (x8
-6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files (x86)/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/ti
-mes/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a
-.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on draft2_RBVRPF.pdf (5 pages, 209913 bytes).
+ 36i,21n,45p,1309b,432s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files (x86)/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/ut
+mb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><
+C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program 
+Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on draft2_RBVRPF.pdf (7 pages, 3409179 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
+ 133 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

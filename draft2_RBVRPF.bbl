@@ -128,4 +128,20 @@ S.~Sarkka, ``Recursive bayesian inference on stochastic differential
   equations,'' Ph.D. dissertation, Helsinki University of Technology Laboratory
   of Computational Engineering, 2006.
 
+\bibitem{Mahler2000}
+R.~Mahler, ``A theoretical foundation for the stein-winter probability
+  hypothesis density (phd) multitarget tracking approach,'' in
+  \emph{Proceedings of the 2000 MSS National Symposium on Sensor and Data
+  Fusion}, vol. 1 (unclassified), San Antonio TX, 2000, pp. 99--117.
+
+\bibitem{Mahler2003}
+------, ``Multitarget bayes filtering via first-order multitarget moments,''
+  \emph{Aerospace and Electronic Systems, IEEE Transactions on}, vol.~39,
+  no.~4, pp. 1152 -- 1178, oct. 2003.
+
+\bibitem{Schuhmacher2008}
+D.~Schuhmacher, B.-T. Vo, and B.-N. Vo, ``A consistent metric for performance
+  evaluation of multi-object filters,'' \emph{Signal Processing, IEEE
+  Transactions on}, vol.~56, no.~8, pp. 3447 --3457, aug. 2008.
+
 \end{thebibliography}
