@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.9)  8 FEB 2012 11:51
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.9)  16 FEB 2012 15:06
 entering extended mode
-**D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/draft2_RBVRPF.tex
-(D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/draft2_RBVRPF.tex
+**D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/draft3_RBVRPF.tex
+(D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/draft3_RBVRPF.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -285,7 +285,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft2_RBVRPF.aux)
+(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft3_RBVRPF.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
@@ -458,7 +458,7 @@ File: fx_filtersmoother-crop.pdf Graphic file (type pdf)
 File: fx_smoother-crop.pdf Graphic file (type pdf)
 
 <use fx_smoother-crop.pdf>
-(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft2_RBVRPF.bbl [6 <D:/pb404/Va
+(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft3_RBVRPF.bbl [6 <D:/pb404/Va
 riableRateAlgorithms/RBVRPS_Paper/example_filter_state.pdf> <D:/pb404/VariableR
 ateAlgorithms/RBVRPS_Paper/example_filtersmoother_state.pdf> <D:/pb404/Variable
 RateAlgorithms/RBVRPS_Paper/example_smoother_state.pdf>]
@@ -480,7 +480,7 @@ Underfull \hbox (badness 2318) in paragraph at lines 92--96
 ** the default language instead.
 ) [7 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/fx_filtersmoother-crop.pdf> 
 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/fx_smoother-crop.pdf>]
-(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft2_RBVRPF.aux) ) 
+(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft3_RBVRPF.aux) ) 
 Here is how much of TeX's memory you used:
  3808 strings out of 494019
  57063 string characters out of 3143883
@@ -510,7 +510,7 @@ msy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
 rogram Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Fil
 es (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/Mi
 KTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on draft2_RBVRPF.pdf (7 pages, 3441952 bytes).
+Output written on draft3_RBVRPF.pdf (7 pages, 3441952 bytes).
 PDF statistics:
  149 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
