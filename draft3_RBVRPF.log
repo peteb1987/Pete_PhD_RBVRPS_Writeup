@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.9)  16 FEB 2012 15:06
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.9)  17 FEB 2012 17:42
 entering extended mode
 **D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/draft3_RBVRPF.tex
 (D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/draft3_RBVRPF.tex
@@ -323,91 +323,84 @@ File: omsptm.fd
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 51.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 82.
+(Font)              <7> on input line 84.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 82.
- [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
+(Font)              <5> on input line 84.
 
-
-]
-Underfull \hbox (badness 5446) in paragraph at lines 96--97
-[]\OT1/ptm/m/n/10 Thus, if $\OML/cmm/m/it/10 []$ \OT1/ptm/m/n/10 is given, the
- fil-ter-ing dis-tri-bu-tions,
+Underfull \hbox (badness 2111) in paragraph at lines 86--87
+[]\OT1/ptm/m/n/10 The ob-jec-tive for par-ti-cle ap-prox-i-ma-tions will be to
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--97
-\OML/cmm/m/it/10 p\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]\OMS/cmsy/m/n/10 j\OML/c
-mm/m/it/10 []; y[]\OT1/cmr/m/n/10 )$\OT1/ptm/m/n/10 , and smooth-ing dis-tri-b
-u-tions,
+Underfull \hbox (badness 5077) in paragraph at lines 86--87
+\OT1/ptm/m/n/10 es-ti-mate the se-quence of change-points. This will be
  []
 
 
-Underfull \hbox (badness 3128) in paragraph at lines 96--97
-\OML/cmm/m/it/10 p\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]\OMS/cmsy/m/n/10 j\OML/c
-mm/m/it/10 []; y[]\OT1/cmr/m/n/10 )$\OT1/ptm/m/n/10 , can be cal-cu-lated op-t
-i-mally us-ing a
+Underfull \hbox (badness 3895) in paragraph at lines 86--87
+\OT1/ptm/m/n/10 de-noted as $\OML/cmm/m/it/10  \OT1/cmr/m/n/10 = \OMS/cmsy/m/n
+/10 f\OML/cmm/m/it/10 K; []; u[]\OMS/cmsy/m/n/10 g$\OT1/ptm/m/n/10 . In ad-di-
+tion, at a
  []
 
 
-Overfull \hbox (59.1704pt too wide) in alignment at lines 108--111
- [] [] [] [][]
+Underfull \hbox (badness 2961) in paragraph at lines 86--87
+\OT1/ptm/m/n/10 par-tic-u-lar time $\OML/cmm/m/it/10 t[]$\OT1/ptm/m/n/10 , the 
+se-quence will be di-vided into
  []
 
 
-Overfull \hbox (22.38673pt too wide) in alignment at lines 131--135
- [] [] [] [][]
+Underfull \hbox (badness 1394) in paragraph at lines 86--87
+\OT1/ptm/m/n/10 past $\OML/cmm/m/it/10 [] \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f
+\OML/cmm/m/it/10 K[]; []; u[]\OMS/cmsy/m/n/10 g$\OT1/ptm/m/n/10 , and fu-ture 
+$\OML/cmm/m/it/10 [] \OT1/cmr/m/n/10 =
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 139--140
-[]\OT1/ptm/m/n/10 Now con-sider terms of (7[]) in turn. First,
- []
+[1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
-Overfull \hbox (76.51874pt too wide) in alignment at lines 159--162
- [] [] [] [][]
- []
-
-
-Overfull \hbox (98.63135pt too wide) in alignment at lines 166--169
- [] [] [] [][]
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 187--188
+] [2]
+Underfull \hbox (badness 10000) in paragraph at lines 233--233
 [] []\OT1/ptm/m/n/10 Sample a change-point his-tory $\OML/cmm/m/it/10 [] \OMS/
 cmsy/m/n/10 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--192
-[] []\OT1/ptm/m/n/10 Weight $\OML/cmm/m/it/10 w[] \OMS/cmsy/m/n/10 / [] 
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 233--235
+[][]
  []
 
 
-Overfull \hbox (118.04959pt too wide) in alignment at lines 218--224
+Overfull \hbox (40.48456pt too wide) in alignment at lines 257--263
  [] [] [] [][]
  []
 
 
-Overfull \hbox (155.12778pt too wide) in alignment at lines 228--232
- [] [] [] [][]
- []
-
-
-Overfull \hbox (54.46086pt too wide) in alignment at lines 236--239
+Overfull \hbox (16.41974pt too wide) in alignment at lines 276--279
  [] [] [] [][]
  []
 
 [3]
-Underfull \hbox (badness 3735) in paragraph at lines 284--285
+Underfull \hbox (badness 1400) in paragraph at lines 340--340
 [] []\OT1/ptm/m/n/10 Run Rao-Blackwellised par-ti-cle fil-ter to ap-prox-i-mate
 
  []
 
 
-Overfull \hbox (72.67473pt too wide) in alignment at lines 332--342
+Overfull \hbox (2.3409pt too wide) in paragraph at lines 340--340
+[] []$[] \OMS/cmsy/m/n/10 / \OML/cmm/m/it/10 w[]p\OT1/cmr/m/n/10 (\OML/cmm/m/it
+/10 []\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 
+N\OT1/cmr/m/n/10 ([]\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 m[]; [] \OT1/cmr/m/n/10 
++
+ []
+
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 340--341
+[][] 
+ []
+
+
+Overfull \hbox (72.67473pt too wide) in alignment at lines 377--387
  [] [] [] [][]
  []
 
@@ -435,18 +428,18 @@ File: example_smoother_state.pdf Graphic file (type pdf)
 
 <use example_smoother_state.pdf>
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 381.
+(Font)              <8> on input line 426.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 381.
+(Font)              <6> on input line 426.
  [5 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/example_data.pdf> <D:/pb404/V
 ariableRateAlgorithms/RBVRPS_Paper/example_filter_kdest.pdf> <D:/pb404/Variable
 RateAlgorithms/RBVRPS_Paper/example_smoother_kdest.pdf>]
-Overfull \hbox (47.11443pt too wide) in alignment at lines 396--399
+Overfull \hbox (5.19656pt too wide) in alignment at lines 441--444
  [] [] [] [][]
  []
 
 
-Overfull \hbox (50.29387pt too wide) in paragraph at lines 418--428
+Overfull \hbox (50.29387pt too wide) in paragraph at lines 463--473
 [][] 
  []
 
@@ -467,7 +460,7 @@ Underfull \hbox (badness 4072) in paragraph at lines 37--40
  []
 
 
-Underfull \hbox (badness 2318) in paragraph at lines 92--96
+Underfull \hbox (badness 2318) in paragraph at lines 110--114
 []\OT1/ptm/m/n/8 A. Doucet, N. De Fre-itas, K. Mur-phy, and S. Rus-sell, ``Rao-
 
  []
@@ -482,13 +475,13 @@ Underfull \hbox (badness 2318) in paragraph at lines 92--96
 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/fx_smoother-crop.pdf>]
 (D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft3_RBVRPF.aux) ) 
 Here is how much of TeX's memory you used:
- 3808 strings out of 494019
- 57063 string characters out of 3143883
- 132281 words of memory out of 3000000
- 7047 multiletter control sequences out of 15000+200000
+ 3814 strings out of 494019
+ 57153 string characters out of 3143883
+ 133326 words of memory out of 3000000
+ 7053 multiletter control sequences out of 15000+200000
  45811 words of font info for 83 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
- 36i,21n,45p,1309b,432s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,21n,45p,1311b,543s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program F
 iles (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files (x86)/MiK
@@ -510,7 +503,7 @@ msy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
 rogram Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Fil
 es (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files (x86)/Mi
 KTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on draft3_RBVRPF.pdf (7 pages, 3441952 bytes).
+Output written on draft3_RBVRPF.pdf (7 pages, 3438710 bytes).
 PDF statistics:
  149 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

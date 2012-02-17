@@ -68,6 +68,24 @@ A.~Doucet and A.~M. Johansen, ``A tutorial on particle filtering and smoothing:
   \url{http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.157.772&rep=rep1&type=pdf}
 \BIBentrySTDinterwordspacing
 
+\bibitem{Jacobsen2006}
+M.~Jacobsen, \emph{Point process theory and applications: marked point and
+  piecewise deterministic processes}, C.~Newman and S.~Resnick, Eds.\hskip 1em
+  plus 0.5em minus 0.4em\relax Birkhauser, 2006.
+
+\bibitem{Godsill2007}
+S.~Godsill, J.~Vermaak, W.~Ng, and J.~Li, ``Models and algorithms for tracking
+  of maneuvering objects using variable rate particle filters,''
+  \emph{Proceedings of the IEEE}, vol.~95, no.~5, pp. 925 --952, May 2007.
+
+\bibitem{Whiteley2011}
+\BIBentryALTinterwordspacing
+N.~Whiteley, A.~M. Johansen, and S.~Godsill, ``Monte carlo filtering of
+  piecewise deterministic processes,'' \emph{Journal of Computational and
+  Graphical Statistics}, vol.~20, no.~1, pp. 119--139, 2011. [Online].
+  Available: \url{http://pubs.amstat.org/doi/abs/10.1198/jcgs.2009.08052}
+\BIBentrySTDinterwordspacing
+
 \bibitem{Godsill2007a}
 \BIBentryALTinterwordspacing
 S.~Godsill, ``Particle filters for continuous-time jump models in tracking
@@ -103,11 +121,6 @@ S.~Sarkka, P.~Bunch, and S.~Godsill, ``A backward-simulation based
 \bibitem{Anderson1979}
 B.~Anderson and J.~Moore, \emph{Optimal filtering}.\hskip 1em plus 0.5em minus
   0.4em\relax Prentice-Hall (Englewood Cliffs, NJ), 1979.
-
-\bibitem{Godsill2007}
-S.~Godsill, J.~Vermaak, W.~Ng, and J.~Li, ``Models and algorithms for tracking
-  of maneuvering objects using variable rate particle filters,''
-  \emph{Proceedings of the IEEE}, vol.~95, no.~5, pp. 925 --952, May 2007.
 
 \bibitem{Kitagawa1996}
 \BIBentryALTinterwordspacing
