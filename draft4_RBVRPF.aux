@@ -14,73 +14,89 @@
 \@writefile{toc}{\contentsline {section}{\numberline {II}Conditionally Linear-Gaussian Variable Rate Models}{1}}
 \newlabel{sec:rbvr_models}{{II}{1}}
 \citation{Whiteley2011}
+\citation{Jacobsen2006}
 \citation{Godsill2007a}
 \citation{Christensen2012}
 \citation{Kalman1960,Anderson1979}
-\citation{Godsill2007a,Christensen2012}
+\citation{Jacobsen2006}
 \newlabel{eq:cp_model}{{1}{2}}
+\newlabel{eq:cp_sequence_prior}{{5}{2}}
 \@writefile{toc}{\contentsline {section}{\numberline {III}The Rao-Blackwellised Variable Rate Particle Filter}{2}}
 \newlabel{sec:rbvrpf}{{III}{2}}
-\newlabel{eq:RBVRPF_weights}{{8}{2}}
+\newlabel{eq:filter_expansion}{{6}{2}}
+\newlabel{eq:cp_sequence_trandens}{{7}{2}}
+\newlabel{eq:cp_cond_model}{{8}{2}}
 \newlabel{eq:RBVRPF_KF_pred_start}{{10}{2}}
 \newlabel{eq:RBVRPF_KF_pred_stop}{{13}{2}}
 \newlabel{eq:RBVRPF_KF_update_start}{{14}{2}}
 \newlabel{eq:RBVRPF_KF_update_stop}{{16}{2}}
-\newlabel{eq:no_new_cp_prob}{{17}{2}}
+\citation{Godsill2007a,Christensen2012}
 \citation{Gordon1993}
 \citation{Godsill2007}
+\citation{Gilks2001}
+\citation{Green1995}
+\citation{Whiteley2011,Gilholm2008}
+\citation{DelMoral2006}
+\citation{Whiteley2011}
 \citation{Sarkka2012}
 \citation{Kitagawa1996}
 \citation{Godsill2004,Sarkka2012}
+\newlabel{eq:RBVRPF_weights}{{20}{3}}
+\newlabel{eq:RBVRPF_weights}{{21}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Improving the Filter}{3}}
 \newlabel{alg:RBVRPF}{{III}{3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Rao-Blackwellised Variable Rate Particle Filter}}{3}}
-\newlabel{eq:new_cp_density}{{18}{3}}
 \@writefile{toc}{\contentsline {section}{\numberline {IV}The Rao-Blackwellised Variable Rate Particle Smoother}{3}}
 \newlabel{sec:rbvrps}{{IV}{3}}
-\newlabel{eq:RBVRPS_back_cond}{{22}{3}}
-\newlabel{eq:RBVRPS_back_cond_weight}{{23}{3}}
 \citation{Fraser1969,Anderson1979,Sarkka2012}
 \citation{Godsill2007a,Christensen2012}
-\citation{Sarkka2006}
+\newlabel{eq:RBVRPS_back_cond}{{25}{4}}
+\newlabel{eq:RBVRPS_back_cond_weight}{{26}{4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Rao-Blackwellised Variable Rate Particle Smoother}}{4}}
 \newlabel{alg:RBVRPS}{{2}{4}}
-\newlabel{eq:RBVRPS_backward_KF_start}{{26}{4}}
-\newlabel{eq:RBVRPS_backward_KF_end}{{32}{4}}
-\newlabel{eq:RBVRPS_back_cond_weight2}{{33}{4}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Simulations}{4}}
-\newlabel{sec:simulations}{{V}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Finance Application}{4}}
+\newlabel{eq:RBVRPS_backward_KF_start}{{29}{4}}
+\newlabel{eq:RBVRPS_backward_KF_end}{{35}{4}}
+\newlabel{eq:RBVRPS_back_cond_weight2}{{36}{4}}
+\citation{Sarkka2006}
 \citation{Mahler2000,Mahler2003}
 \citation{Schuhmacher2008}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces An example simulated data set}}{5}}
-\newlabel{fig:example_data}{{3}{5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Filter (a) and smoother (b) kernel density estimates for value (blue) and trend (green) jump times. Correct times overlayed as vertical lines (black=value, red=trend).}}{5}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{5}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{5}}
-\newlabel{fig:example_kdest}{{4}{5}}
-\bibstyle{IEEEtran}
-\bibdata{D:/pb404/Dropbox/PhD/OTbib}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Simulations}{5}}
+\newlabel{sec:simulations}{{V}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Finance Application}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces An example simulated data set}}{6}}
+\newlabel{fig:example_data}{{3}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Filter (a) and smoother (b) kernel density estimates for value (blue) and trend (green) jump times. Correct times overlayed as vertical lines (black=value, red=trend).}}{6}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{6}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{6}}
+\newlabel{fig:example_kdest}{{4}{6}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces State estimates using RBVRPF + KF (a) final RBVRPF approximation + RTS smoother (b) and RBVRPS + RTS smoother. Solid lines show means of each particle. Dashed lines show mean $\pm $2 standard deviations.}}{6}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{6}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{6}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {}}}{6}}
 \newlabel{fig:example_state}{{5}{6}}
-\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Changepoint sequence estimation performance.}}{6}}
-\newlabel{tab:cp_performance}{{I}{6}}
-\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces State estimation performance.}}{6}}
-\newlabel{tab:state_performance}{{II}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Tracking Application}{6}}
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{6}}
-\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  {}A: Derivation of the Backwards Kalman Filter}{6}}
-\newlabel{app:backward_filter}{{A}{6}}
-\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  {}B: Model Discretisation}{6}}
-\newlabel{app:model_discretisation}{{B}{6}}
+\bibstyle{IEEEtran}
+\bibdata{D:/pb404/Dropbox/PhD/OTbib}
 \bibcite{Kalman1960}{1}
 \bibcite{Rauch1965}{2}
 \bibcite{Gordon1993}{3}
 \bibcite{Doucet2000a}{4}
 \bibcite{Godsill2004}{5}
 \bibcite{Cappe2007}{6}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Changepoint sequence estimation performance.}}{7}}
+\newlabel{tab:cp_performance}{{I}{7}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces State estimation performance.}}{7}}
+\newlabel{tab:state_performance}{{II}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Tracking Application}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{7}}
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  {}A: Derivation of the Backwards Kalman Filter}{7}}
+\newlabel{app:backward_filter}{{A}{7}}
+\@writefile{toc}{\contentsline {section}{Appendix\nobreakspace  {}B: Model Discretisation}{7}}
+\newlabel{app:model_discretisation}{{B}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Filter (a) and smoother (b) state and kernel density estimates. State estimates show mean for each particle (solid) as well as mean $\pm $2 standard deviations (dashed). Kernel density estimates for value (blue) and trend (green) jump times.}}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{7}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{7}}
+\newlabel{fig:fx_results}{{6}{7}}
+\@writefile{toc}{\contentsline {section}{References}{7}}
 \bibcite{Doucet2009}{7}
 \bibcite{Jacobsen2006}{8}
 \bibcite{Godsill2007}{9}
@@ -97,11 +113,6 @@
 \bibcite{Mahler2000}{20}
 \bibcite{Mahler2003}{21}
 \bibcite{Schuhmacher2008}{22}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Filter (a) and smoother (b) state and kernel density estimates. State estimates show mean for each particle (solid) as well as mean $\pm $2 standard deviations (dashed). Kernel density estimates for value (blue) and trend (green) jump times.}}{7}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {}}}{7}}
-\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {}}}{7}}
-\newlabel{fig:fx_results}{{6}{7}}
-\@writefile{toc}{\contentsline {section}{References}{7}}
-\@writefile{toc}{\contentsline {section}{Biographies}{7}}
-\@writefile{toc}{\contentsline {subsection}{Pete Bunch}{7}}
-\@writefile{toc}{\contentsline {subsection}{Simon Godsill}{7}}
+\@writefile{toc}{\contentsline {section}{Biographies}{8}}
+\@writefile{toc}{\contentsline {subsection}{Pete Bunch}{8}}
+\@writefile{toc}{\contentsline {subsection}{Simon Godsill}{8}}

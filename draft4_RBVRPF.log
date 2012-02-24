@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.9)  23 FEB 2012 12:25
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.9)  24 FEB 2012 18:16
 entering extended mode
 **draft4_RBVRPF.tex
 (D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft4_RBVRPF.tex
@@ -285,7 +285,11 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft4_RBVRPF.aux)
+(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft4_RBVRPF.aux
+
+LaTeX Warning: Label `eq:RBVRPF_weights' multiply defined.
+
+)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
@@ -298,8 +302,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
 LaTeX Font Info:    ... okay on input line 36.
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count118
 \scratchdimen=\dimen146
@@ -326,140 +329,106 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 82.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 82.
-
-Underfull \hbox (badness 2111) in paragraph at lines 84--85
-[]\OT1/ptm/m/n/10 The ob-jec-tive for par-ti-cle ap-prox-i-ma-tions will be to
- []
-
-
-Underfull \hbox (badness 5077) in paragraph at lines 84--85
-\OT1/ptm/m/n/10 es-ti-mate the se-quence of change-points. This will be
- []
-
-
-Underfull \hbox (badness 3895) in paragraph at lines 84--85
-\OT1/ptm/m/n/10 de-noted as $\OML/cmm/m/it/10  \OT1/cmr/m/n/10 = \OMS/cmsy/m/n
-/10 f\OML/cmm/m/it/10 K; []; u[]\OMS/cmsy/m/n/10 g$\OT1/ptm/m/n/10 . In ad-di-
-tion, at a
- []
-
-
-Underfull \hbox (badness 2961) in paragraph at lines 84--85
-\OT1/ptm/m/n/10 par-tic-u-lar time $\OML/cmm/m/it/10 t[]$\OT1/ptm/m/n/10 , the 
-se-quence will be di-vided into
- []
-
-
-Underfull \hbox (badness 1394) in paragraph at lines 84--85
-\OT1/ptm/m/n/10 past $\OML/cmm/m/it/10 [] \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 f
-\OML/cmm/m/it/10 K[]; []; u[]\OMS/cmsy/m/n/10 g$\OT1/ptm/m/n/10 , and fu-ture 
-$\OML/cmm/m/it/10 [] \OT1/cmr/m/n/10 =
- []
-
-[1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
+ [1{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 224--224
+Underfull \hbox (badness 10000) in paragraph at lines 228--228
 [] []\OT1/ptm/m/n/10 Sample a change-point his-tory $\OML/cmm/m/it/10 [] \OMS/
 cmsy/m/n/10 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 224--226
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 228--230
 [][]
  []
 
 
-Overfull \hbox (40.48456pt too wide) in alignment at lines 248--254
- [] [] [] [][]
- []
+LaTeX Warning: Citation `Gilks2001' on page 3 undefined on input line 238.
 
 
-Overfull \hbox (16.41974pt too wide) in alignment at lines 267--270
- [] [] [] [][]
- []
+LaTeX Warning: Citation `Green1995' on page 3 undefined on input line 238.
+
+
+LaTeX Warning: Citation `Gilholm2008' on page 3 undefined on input line 238.
+
+
+LaTeX Warning: Citation `DelMoral2006' on page 3 undefined on input line 240.
 
 [3]
-Underfull \hbox (badness 1400) in paragraph at lines 331--331
+Underfull \hbox (badness 1400) in paragraph at lines 335--335
 [] []\OT1/ptm/m/n/10 Run Rao-Blackwellised par-ti-cle fil-ter to ap-prox-i-mate
 
  []
 
 
-Overfull \hbox (2.3409pt too wide) in paragraph at lines 331--331
-[] []$[] \OMS/cmsy/m/n/10 / \OML/cmm/m/it/10 w[]p\OT1/cmr/m/n/10 (\OML/cmm/m/it
-/10 []\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 )\OMS/cmsy/m/n/10 
-N\OT1/cmr/m/n/10 ([]\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 m[]; [] \OT1/cmr/m/n/10 
-+
- []
-
-
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 331--332
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 335--336
 [][] 
  []
 
-
-Overfull \hbox (72.67473pt too wide) in alignment at lines 368--378
+[4]
+Overfull \hbox (72.67473pt too wide) in alignment at lines 372--382
  [] [] [] [][]
  []
 
-[4] <example_data.pdf, id=30, 433.62pt x 361.35pt>
+<example_data.pdf, id=29, 433.62pt x 361.35pt>
 File: example_data.pdf Graphic file (type pdf)
  <use example_data.pdf>
-<example_filter_kdest.pdf, id=31, 433.62pt x 144.54pt>
+<example_filter_kdest.pdf, id=30, 433.62pt x 144.54pt>
 File: example_filter_kdest.pdf Graphic file (type pdf)
 
 <use example_filter_kdest.pdf>
-<example_smoother_kdest.pdf, id=32, 433.62pt x 144.54pt>
+<example_smoother_kdest.pdf, id=31, 433.62pt x 144.54pt>
 File: example_smoother_kdest.pdf Graphic file (type pdf)
 
 <use example_smoother_kdest.pdf>
-<example_filter_state.pdf, id=33, 433.62pt x 289.08pt>
+<example_filter_state.pdf, id=32, 433.62pt x 289.08pt>
 File: example_filter_state.pdf Graphic file (type pdf)
 
 <use example_filter_state.pdf>
-<example_filtersmoother_state.pdf, id=34, 433.62pt x 289.08pt>
+<example_filtersmoother_state.pdf, id=33, 433.62pt x 289.08pt>
 File: example_filtersmoother_state.pdf Graphic file (type pdf)
 
 <use example_filtersmoother_state.pdf>
-<example_smoother_state.pdf, id=35, 433.62pt x 289.08pt>
+<example_smoother_state.pdf, id=34, 433.62pt x 289.08pt>
 File: example_smoother_state.pdf Graphic file (type pdf)
 
 <use example_smoother_state.pdf>
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 417.
+(Font)              <8> on input line 421.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 417.
- [5 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/example_data.pdf> <D:/pb404/V
-ariableRateAlgorithms/RBVRPS_Paper/example_filter_kdest.pdf> <D:/pb404/Variable
-RateAlgorithms/RBVRPS_Paper/example_smoother_kdest.pdf>]
-Overfull \hbox (5.19656pt too wide) in alignment at lines 432--435
+(Font)              <6> on input line 421.
+ [5]
+Overfull \hbox (5.19656pt too wide) in alignment at lines 436--439
  [] [] [] [][]
  []
 
 
-Overfull \hbox (50.29387pt too wide) in paragraph at lines 454--464
+Overfull \hbox (50.29387pt too wide) in paragraph at lines 458--468
 [][] 
  []
 
-<fx_filtersmoother-crop.pdf, id=49, 492.84125pt x 370.38374pt>
+[6 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/example_data.pdf> <D:/pb404/Va
+riableRateAlgorithms/RBVRPS_Paper/example_filter_kdest.pdf> <D:/pb404/VariableR
+ateAlgorithms/RBVRPS_Paper/example_smoother_kdest.pdf> <D:/pb404/VariableRateAl
+gorithms/RBVRPS_Paper/example_filter_state.pdf> <D:/pb404/VariableRateAlgorithm
+s/RBVRPS_Paper/example_filtersmoother_state.pdf> <D:/pb404/VariableRateAlgorith
+ms/RBVRPS_Paper/example_smoother_state.pdf>]
+<fx_filtersmoother-crop.pdf, id=64, 492.84125pt x 370.38374pt>
 File: fx_filtersmoother-crop.pdf Graphic file (type pdf)
 
 <use fx_filtersmoother-crop.pdf>
-<fx_smoother-crop.pdf, id=50, 492.84125pt x 370.38374pt>
+<fx_smoother-crop.pdf, id=65, 492.84125pt x 370.38374pt>
 File: fx_smoother-crop.pdf Graphic file (type pdf)
 
 <use fx_smoother-crop.pdf>
-(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft4_RBVRPF.bbl [6 <D:/pb404/Va
-riableRateAlgorithms/RBVRPS_Paper/example_filter_state.pdf> <D:/pb404/VariableR
-ateAlgorithms/RBVRPS_Paper/example_filtersmoother_state.pdf> <D:/pb404/Variable
-RateAlgorithms/RBVRPS_Paper/example_smoother_state.pdf>]
+(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft4_RBVRPF.bbl
 Underfull \hbox (badness 4072) in paragraph at lines 37--40
 []\OT1/ptm/m/n/8 N. Gor-don, D. Salmond, and A. Smith, ``Novel ap-proach to
  []
 
-
+[7 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/fx_filtersmoother-crop.pdf> <D
+:/pb404/VariableRateAlgorithms/RBVRPS_Paper/fx_smoother-crop.pdf>]
 Underfull \hbox (badness 2318) in paragraph at lines 110--114
 []\OT1/ptm/m/n/8 A. Doucet, N. De Fre-itas, K. Mur-phy, and S. Rus-sell, ``Rao-
 
@@ -471,18 +440,21 @@ Underfull \hbox (badness 2318) in paragraph at lines 110--114
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `English'. Using the pattern for
 ** the default language instead.
-) [7 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/fx_filtersmoother-crop.pdf> 
-<D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/fx_smoother-crop.pdf>]
-(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft4_RBVRPF.aux)
+) [8
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+] (D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft4_RBVRPF.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3814 strings out of 494019
- 57153 string characters out of 3143883
- 133326 words of memory out of 3000000
- 7053 multiletter control sequences out of 15000+200000
+ 3820 strings out of 494019
+ 57250 string characters out of 3143883
+ 131380 words of memory out of 3000000
+ 7059 multiletter control sequences out of 15000+200000
  45811 words of font info for 83 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
  36i,21n,45p,1266b,543s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -506,9 +478,9 @@ msfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/u
 tmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program
  Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on draft4_RBVRPF.pdf (7 pages, 3438769 bytes).
+Output written on draft4_RBVRPF.pdf (8 pages, 3442424 bytes).
 PDF statistics:
- 149 PDF objects out of 1000 (max. 8388607)
+ 152 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
