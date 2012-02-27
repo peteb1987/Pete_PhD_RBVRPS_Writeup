@@ -81,7 +81,7 @@ We review the structure of conditionally linear-Gaussian variable rate models in
 
 We consider a general model from time $0$ to $T$, between which observations, $\{y_1 \dots y_N\}$, are made at times $\{t_1 \dots t_N = T\}$. The linear state at these times is written as $\{x_1 \dots x_N\}$. During this period, an unknown number of changepoints, $K$, occur at times $\{ \tau_1 \dots \tau_K \}$, each with associated changepoint parameters, $\{ u_1 \dots u_K \}$. These are the marks of the MPP. Discrete sets containing multiple values over time will be written as, e.g. $y_{1:n} = \{y_1 \dots y_n\}$.
 
-The objective for inference will be to estimate the sequence of changepoints. This will be denoted as $\theta = \{\tau_{1:K}, u_{1:K}\}$. In addition, at a particular time $t_n$, the sequence will be divided into past $\theta_n = \{\tau_{j}, u_{j} \forall j : 0 \leq \tau_j < t_n \}$, and future $\theta_n = \{\tau_{j}, u_{j} \forall j : t_n \leq \tau_j < T \}$. It will also be useful to define a variable for the changepoints which occur in the interval $[t_{n-1},t_n)$, $\theta_{n \setminus n-1} = \{\tau_{j}, u_{j} \forall j : t_{n-1} \leq \tau_j < t_n \}$. The cardinality of these sets (i.e. the number of changepoints occurring in the appropriate range) is denoted $K_n$, $K_n^+$ and $K_{n \setminus n-1}$ respectively.
+The objective for inference will be to estimate the sequence of changepoints. This will be denoted as $\theta = \{\tau_{1:K}, u_{1:K}\}$. In addition, at a particular time $t_n$, the sequence will be divided into past $\theta_n = \{\tau_{j}, u_{j} \forall j : 0 \leq \tau_j < t_n \}$, and future $\theta_n^+ = \{\tau_{j}, u_{j} \forall j : t_n \leq \tau_j < T \}$. It will also be useful to define a variable for the changepoints which occur in the interval $[t_{n-1},t_n)$, $\theta_{n \setminus n-1} = \{\tau_{j}, u_{j} \forall j : t_{n-1} \leq \tau_j < t_n \}$. The cardinality of these sets (i.e. the number of changepoints occurring in the appropriate range) is denoted $K_n$, $K_n^+$ and $K_{n \setminus n-1}$ respectively.
 
 Note that $\theta_n$ not only conveys information about where changepoints occur, but also where they do not. i.e. it is implicit that $\tau_{K_n+1} > t_n$; furthermore that $\theta_n$ conveys less information than the two sets $\theta_{n-1}$ and $\theta_{n \setminus n-1}$ separately. The latter also impose the condition that $\tau_{K_{n-1}} < t_{n-1} < \tau_{K_{n-1}+1}$.
 
@@ -290,18 +290,10 @@ The changepoint transition term $p(\tilde{\theta}_{n}^+|\theta_{n})$ may be expr
                                     &\propto& p(\tilde{u}_{K_n+1}|\tilde{\tau}_{K_n+1}, \tau_{K_n}, u_{K_n}) p(\tilde{\tau}_{K_n+1}|\tau_{K_n})   .
 \end{IEEEeqnarray}
 
-%For a Markovian sequence of changepoints, this is simply proportional to the probability of the first changepoint after $t_n$ given the last changepoint preceding $t_n$, i.e.
-
-%\begin{IEEEeqnarray}{rCl}
-% P(\tilde{\theta}_{[t_n,T]}|\theta_{[0,t_n]}^{(i)}) &\propto& P(\tilde{\theta}_{k+1}|\theta_k, \tau_{k+1}>t_n)  ,
-%\end{IEEEeqnarray}
-
-%which can be calculated from the process model.
-
-The second term in (\ref{eq:RBVRPS_back_cond_weight}) is the familiar Kalman filter density $p(x_n|\theta_{n}^{-(i)}, y_{1:n}) = \mathcal{N}(x_n|m_n^{(i)}, P_n^{(i)})$. The first term, $p(y_{n+1:N}|x_n, \theta_{n}^{-(i)}, \tilde{\theta}_{n}^+$, is an improper likelihood density, and may be calculated analytically using a backwards Kalman filter, in a similar manner to that used in the two-filter smoother \cite{Fraser1969,Anderson1979,Sarkka2012}. Such a backwards Kalman filter uses the following recursions. Details are provided in appendix~\ref{app:backward_filter}, and in the aforesaid references.
+The state density in (\ref{eq:RBVRPS_back_cond_weight}) is the familiar Kalman filter estimate, given by $p(x_n|\theta_{n}^{(i)}, y_{1:n}) = \mathcal{N}(x_n|m_n^{(i)}, P_n^{(i)})$. The likelihood term, $p(y_{n+1:N}|x_n, \theta_{n}^{(i)}, \tilde{\theta}_{n}^+$, is an improper density over $x_n$, and may be calculated analytically using a backwards Kalman filter, in a similar manner to that used in the two-filter smoother \cite{Fraser1969,Anderson1979,Sarkka2012}. Such a backwards Kalman filter uses the following recursions. Details are provided in appendix~\ref{app:backward_filter}, and in the aforesaid references.
 
 \begin{equation}
- p(y_{n+1:N}|x_n, \theta_{n}^{-(i)}, \tilde{\theta}_{n}^+) = Z_n \mathcal{N}(x_n|\tilde{m}_n, \tilde{P}_n)
+ p(y_{n+1:N}|x_n, \theta_{n}^{(i)}, \tilde{\theta}_{n}^+) = Z_n \mathcal{N}(x_n|\tilde{m}_n, \tilde{P}_n)
 \end{equation}
 
 \begin{IEEEeqnarray}{rCl}
@@ -317,26 +309,26 @@ The second term in (\ref{eq:RBVRPS_back_cond_weight}) is the familiar Kalman fil
 Substituting into (\ref{eq:RBVRPS_back_cond_weight}), the backwards conditional weights are given by:
 
 \begin{equation}
- \tilde{w}_n \propto p(\theta_{n}^+|\theta_{n}^{-(i)}) \mathcal{N}(\tilde{m}_n^-|m_n, \tilde{P}_n^- + P_n)
+ \tilde{w}_n \propto p(\theta_{n}^+|\theta_{n}^{(i)}) \mathcal{N}(\tilde{m}_n^-|m_n, \tilde{P}_n^- + P_n)
 \label{eq:RBVRPS_back_cond_weight2}
 \end{equation}
 
-Samples of $\theta_{n}^-$ may be drawn from the particle distribution of \ref{eq:RBVRPS_back_cond}. Once sampling has progressed backwards from $n=N \dots 1$, a complete particle from the smoothing distribution will have been generated. This procedure may then be repeated until sufficient particles have been obtained. The procedure is summarised below.% in algorithm~\ref{alg:RBVRPS}.
+Samples of $\theta_{n}$ may be drawn from the particle distribution of \ref{eq:RBVRPS_back_cond}. Once sampling has progressed backwards from $n=N \dots 1$, a complete particle from the smoothing distribution will have been generated. This procedure may then be repeated until sufficient particles have been obtained. The procedure is summarised below in algorithm~\ref{alg:RBVRPS}.
 
 %\begin{algorithm}
 \begin{figure}
 \fbox{\parbox{\columnwidth}{
 \begin{algorithmic}[1]
-  \STATE Run Rao-Blackwellised particle filter to approximate $p(x_n, \theta_{[0,t_n]}|y_{1:n})$ with particles $\theta_{[0,t_n]}^{(i)}$ and associated Gaussian moments $m_{n}^{(i)}$ and $P_{n}^{(i)}$.
+  \STATE Run Rao-Blackwellised particle filter to approximate $p(\theta_{n}|y_{1:n})$ with particles $\{\theta_{n}^{(i)}\}$ and $\{p(x_n|\theta_{n}^{(i)},y_{1:n})\}$ as normal distributions with moments $\{m_{n}^{(i)}\}$ and $\{P_{n}^{(i)}\}$. Store all results.
   \FOR{$i=1 \dots N_S$}
-  	\STATE Initialise particle using $\theta_{[0,T]} \sim \sum_j w_N^{(j)} \delta_{\theta_{[0,T]}^{(j)}}(\theta_{[0,T]})$
+  	\STATE Initialise particle using $\tilde{\theta}^{(i)} \sim \sum_j w_N^{(j)} \delta_{\theta^{(j)}}(\theta)$.
     \FOR{$n=N \dots 1$}
       \STATE Backwards Kalman filter: Calculate $\tilde{m}_n^{-(i)}$ and $\tilde{P}_n^{-(i)}$ using \ref{eq:RBVRPS_backward_KF_start} to \ref{eq:RBVRPS_backward_KF_end}.
       \FOR{$j=1 \dots N_P$}
-	      \STATE $\tilde{w}_n^{(j)} \propto w_n^{(j)} p(\theta_{[t_n,T]}|\theta_{[0,t_n]}^{(j)}) \mathcal{N}(\tilde{m}_n^{-(j)}|m_n, \tilde{P}_n^{-(j)} + P_n)$
+	      \STATE Calculate weight $\tilde{w}_n^{(j)}$ using (\ref{eq:RBVRPS_back_cond_weight2}).
       \ENDFOR
-      \STATE Sample $\tilde{\theta}_{[0,t_n]}^{(i)} \sim \sum_j \tilde{w}_n^{(j)} \delta_{\theta_{[0,t_n]}^{(j)}}(\theta_{[0,t_n]})$
-      \STATE Discard $\tilde{\theta}_{[0,t_{n-1}]}^{(i)}$
+      \STATE Sample $\tilde{\theta}_{n}^{(i)} \sim \sum_j \tilde{w}_n^{(j)} \delta_{\theta_{n}^{(j)}}(\theta_{n})$.
+      \STATE Discard $\tilde{\theta}_{n-1}^{(i)}$.
     \ENDFOR
   \ENDFOR
 \end{algorithmic}
