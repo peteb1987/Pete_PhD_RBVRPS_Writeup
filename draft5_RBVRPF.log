@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.9)  29 FEB 2012 15:24
+This is pdfTeX, Version 3.1415926-1.40.11 (MiKTeX 2.9) (preloaded format=pdflatex 2012.1.9)  29 FEB 2012 17:16
 entering extended mode
-**draft4_RBVRPF.tex
-(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft4_RBVRPF.tex
+**draft5_RBVRPF.tex
+(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft5_RBVRPF.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -285,7 +285,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft4_RBVRPF.aux
+(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft5_RBVRPF.aux
 
 LaTeX Warning: Label `eq:RBVRPF_weights' multiply defined.
 
@@ -364,39 +364,41 @@ File: example_filter_kdest.pdf Graphic file (type pdf)
 <example_smoother_kdest.pdf, id=31, 433.62pt x 144.54pt>
 File: example_smoother_kdest.pdf Graphic file (type pdf)
 
-<use example_smoother_kdest.pdf>
-<example_filter_state.pdf, id=32, 433.62pt x 289.08pt>
+<use example_smoother_kdest.pdf> [5]
+<example_filter_state.pdf, id=36, 433.62pt x 289.08pt>
 File: example_filter_state.pdf Graphic file (type pdf)
 
 <use example_filter_state.pdf>
-<example_filtersmoother_state.pdf, id=33, 433.62pt x 289.08pt>
+<example_filtersmoother_state.pdf, id=37, 433.62pt x 289.08pt>
 File: example_filtersmoother_state.pdf Graphic file (type pdf)
 
 <use example_filtersmoother_state.pdf>
-<example_smoother_state.pdf, id=34, 433.62pt x 289.08pt>
+<example_smoother_state.pdf, id=38, 433.62pt x 289.08pt>
 File: example_smoother_state.pdf Graphic file (type pdf)
 
 <use example_smoother_state.pdf>
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 424.
+(Font)              <8> on input line 435.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 424.
- [5]
-Overfull \hbox (5.19656pt too wide) in alignment at lines 439--442
+(Font)              <6> on input line 435.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/example_data.pdf> <D:/pb404/V
+ariableRateAlgorithms/RBVRPS_Paper/example_filter_kdest.pdf> <D:/pb404/Variable
+RateAlgorithms/RBVRPS_Paper/example_smoother_kdest.pdf> <D:/pb404/VariableRateA
+lgorithms/RBVRPS_Paper/example_filter_state.pdf> <D:/pb404/VariableRateAlgorith
+ms/RBVRPS_Paper/example_filtersmoother_state.pdf> <D:/pb404/VariableRateAlgorit
+hms/RBVRPS_Paper/example_smoother_state.pdf>]
+Overfull \hbox (5.19656pt too wide) in alignment at lines 450--453
  [] [] [] [][]
  []
 
 
-Overfull \hbox (50.29387pt too wide) in paragraph at lines 461--471
+Overfull \hbox (50.29387pt too wide) in paragraph at lines 472--482
 [][] 
  []
 
-[6 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/example_data.pdf> <D:/pb404/Va
-riableRateAlgorithms/RBVRPS_Paper/example_filter_kdest.pdf> <D:/pb404/VariableR
-ateAlgorithms/RBVRPS_Paper/example_smoother_kdest.pdf> <D:/pb404/VariableRateAl
-gorithms/RBVRPS_Paper/example_filter_state.pdf> <D:/pb404/VariableRateAlgorithm
-s/RBVRPS_Paper/example_filtersmoother_state.pdf> <D:/pb404/VariableRateAlgorith
-ms/RBVRPS_Paper/example_smoother_state.pdf>]
 <fx_filtersmoother-crop.pdf, id=64, 492.84125pt x 370.38374pt>
 File: fx_filtersmoother-crop.pdf Graphic file (type pdf)
 
@@ -404,14 +406,19 @@ File: fx_filtersmoother-crop.pdf Graphic file (type pdf)
 <fx_smoother-crop.pdf, id=65, 492.84125pt x 370.38374pt>
 File: fx_smoother-crop.pdf Graphic file (type pdf)
 
-<use fx_smoother-crop.pdf>
-(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft4_RBVRPF.bbl
+<use fx_smoother-crop.pdf> [7 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/fx_
+filtersmoother-crop.pdf> <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/fx_smoot
+her-crop.pdf>]
+Overfull \hbox (170.78247pt too wide) in alignment at lines 617--622
+ [] [] [] [][]
+ []
+
+(D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft5_RBVRPF.bbl
 Underfull \hbox (badness 4072) in paragraph at lines 37--40
 []\OT1/ptm/m/n/8 N. Gor-don, D. Salmond, and A. Smith, ``Novel ap-proach to
  []
 
-[7 <D:/pb404/VariableRateAlgorithms/RBVRPS_Paper/fx_filtersmoother-crop.pdf> <D
-:/pb404/VariableRateAlgorithms/RBVRPS_Paper/fx_smoother-crop.pdf>]
+
 Underfull \hbox (badness 2318) in paragraph at lines 110--114
 []\OT1/ptm/m/n/8 A. Doucet, N. De Fre-itas, K. Mur-phy, and S. Rus-sell, ``Rao-
 
@@ -423,7 +430,9 @@ Underfull \hbox (badness 2318) in paragraph at lines 110--114
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `English'. Using the pattern for
 ** the default language instead.
-) [8] (D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft4_RBVRPF.aux)
+[8]) [9
+
+] (D:\pb404\VariableRateAlgorithms\RBVRPS_Paper\draft5_RBVRPF.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -431,7 +440,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  3820 strings out of 494019
  57250 string characters out of 3143883
- 131396 words of memory out of 3000000
+ 133396 words of memory out of 3000000
  7059 multiletter control sequences out of 15000+200000
  45811 words of font info for 83 fonts, out of 3000000 for 9000
  717 hyphenation exceptions out of 8191
@@ -456,9 +465,9 @@ msfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/u
 tmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program
  Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on draft4_RBVRPF.pdf (8 pages, 3441668 bytes).
+Output written on draft5_RBVRPF.pdf (9 pages, 3446386 bytes).
 PDF statistics:
- 152 PDF objects out of 1000 (max. 8388607)
+ 155 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -65,7 +65,7 @@ The abstract goes here.
 
 For simple models with linear dynamics and Gaussian-distributed random variables, optimal analytic inference algorithms exist, including the Kalman filter \cite{Kalman1960} and Rauch-Tung-Striebel (RTS) smoother \cite{Rauch1965}. For nonlinear, non-Gaussian models, such analytic solutions do not exist, and it is often necessary to employ numerical approximations, including the particle filter \cite{Gordon1993} and particle smoother \cite{Doucet2000a,Godsill2004} (see \cite{Cappe2007,Doucet2009} for a thorough introduction to particle methods).
 
-Commonly, the unknown quantity under consideration is continually varying -- e.g. the position of a moving object -- but is modelled as a discrete-time random process synchronous with the observations. This leads to the standard discrete-time hidden Markov model. Such ``fixed rate'' models are poorly suited to quantities with occasional discontinuities in their evolution; for example, the price of a financial asset which may display large jumps at random times between periods of diffusion-like behaviour, or the kinematic state of a manoeuvring vehicle which may have sudden jumps in the acceleration when turns begin or end. In such cases, a ``variable rate'' model may be more appropriate, in which the state evolution is dependent upon a set of unknown changepoints.
+The simplest form of state-space model treats the quantity under consideration as a discrete-time random process synchronous with the observations, and uses a fixed or known Markovian model for the state transitions. This leads to the standard discrete-time hidden Markov model. Such ``fixed rate'' models are poorly suited to quantities with non-homogeneous state dynamics, such as occasional discontinuities in their evolution; for example, the price of a financial asset which may display large jumps at random times between periods of diffusion-like behaviour, or the kinematic state of a manoeuvring vehicle which may have sudden jumps in the acceleration when turns begin or end. In such cases, a ``variable rate'' model may be more appropriate, in which the state evolution is dependent upon a set of unknown changepoints.
 
 In a variable rate model, the set of changepoints and associated parameters are modelled as a marked point process (MPP) \cite{Jacobsen2006}, conditional upon which the state evolves according to some benign dynamics. In \cite{Godsill2007,Whiteley2011}, the conditional state evolution is treated as deterministic, while in \cite{Godsill2007a,Christensen2012} a conditionally linear-Gaussian state model is considered.
 
@@ -120,7 +120,7 @@ The tasks of filtering and smoothing may now be considered as estimation of the 
 
 The Rao-Blackwellised Variable Rate Particle Filter (RBVRPF) was first described in \cite{Godsill2007a}, and in \cite{Christensen2012} it was developed for use in a financial prediction algorithm. The objective of the algorithm is to sequentially estimate the distribution of the changepoint sequence, $p(\theta_{n}| y_{1:n})$, at each time $t_n$. The linear state filtering distribution, $p(x_n|\theta_{n}, y_{1:n})$, can then be estimated by a Kalman filter \cite{Kalman1960,Anderson1979}.
 
-The posterior changepoint distribution may be expanded using Bayes' rule.
+The posterior changepoint distribution at time $t_n$ may be expanded using Bayes' rule.
 
 \begin{IEEEeqnarray}{rCl}
 \IEEEeqnarraymulticol{3}{l}{p(\theta_{n}|y_{1:n})} \nonumber \\
@@ -163,13 +163,13 @@ The mean and variance are given by the following standard recursions (dependence
  P_n   & = & P_n^- - K_n S_n K_n^T \label{eq:RBVRPF_KF_update_stop}
 \end{IEEEeqnarray}
 
-Having defined the terms of the changepoint posterior, we now consider the inference algorithm. A particle filter is a numerical method used to approximate a filtering distribution with a discrete set of weighted samples drawn from that distribution using sequential importance sampling (IS). In this case, each particle will consist of a changepoint sequence between $0$ and $t$.
+Having defined the terms of the changepoint posterior, we now consider the inference algorithm. A particle filter is a numerical method used to approximate a filtering distribution with a discrete set of weighted samples drawn from that distribution using sequential importance sampling (IS). In this case, each particle will consist of a sequence of changepoints between $0$ and $t$.
 
 \begin{equation}
 \hat{p}(\theta_{n}|y_{1:n}) = \sum_j w_n^{(j)} \delta_{\theta_{n}^{(j)}}(\theta_{n})
 \end{equation}
 
-where $\delta_x(X)$ is a dirac probability mass at the point $X=x$.
+where $\delta_x(X)$ is a dirac probability mass at $X=x$.
 
 The particle filter is a recursive algorithm. At the $n$th step, a particle, $\theta_{n}^{(i)}$, is first sampled from an importance density.
 
@@ -249,13 +249,13 @@ Estimating changepoints online is a challenging task because the presence of a c
 
 The particles of the final filtering step approximate the distribution, $p(\theta|y_{1:N})$, which is desired smoothing distribution. However, in the same manner as the fixed rate filter-smoother of \cite{Kitagawa1996}, this approximation is likely to lack path-space diversity -- the particles all share the same set of changepoints from early times, with variation only appearing for changepoints closer to $T$. For a good characterisation of the smoothing distribution, it is necessary to rejuvenate the set of particles. This is achieved with a backward pass through the observations in a similar manner to the forward-backward methods described in \cite{Godsill2004,Sarkka2012}.
 
-The target smoothing distribution may be expanded with Bayes rule.
+The objective of the smoothing algorithm will be to generate a set of particles representing $p(\theta|y_{1:N})$. Each particle will consist of a list of changepoints. The target smoothing distribution may be expanded with Bayes rule.
 
 \begin{IEEEeqnarray}{rCl}
  p(\theta|y_{1:N}) = p(\theta_{n}^{+}|y_{1:N}) p(\theta_{n}|\theta_{n}^{+}, y_{1:N})
 \end{IEEEeqnarray}
 
-Thus, a particle representing $p(\theta_{n}^{+}|y_{1:N})$ may be extended backwards by sampling from the backwards conditional distribution, $p(\theta_{n}|\theta_{n}^{+}, y_{1:N})$, which may be approximated by reweighting the particle of the $n$th filtering distribution. The resulting particles are then marginalised by discarding the changepoints which come before $t_{n-1}$ (which will still be suffering from low diversity) to leave a set of samples from $p(\theta_{n-1}^{+}|y_{1:N})$, and the procedure continues recursively.
+Thus, a particle representing $p(\theta_{n}^{+}|y_{1:N})$ may be extended backwards by sampling from the backwards conditional distribution, $p(\theta_{n}|\theta_{n}^{+}, y_{1:N})$, which may be approximated by reweighting the particle of the $n$th filtering distribution. The resulting particles are then marginalised by discarding the changepoints which come before $t_{n-1}$ (which will still be suffering from low diversity) to leave a set of samples from $p(\theta_{n-1}^{+}|y_{1:N})$, and the procedure continues recursively. After a complete backwards pass through the observations, a single particle will have been generated. The procedure is then repeated until sufficient samples are obtained.
 
 If the future changepoints and their parameters, $\tilde{\theta}_{n}^+$, have already been sampled (and may thus be considered fixed), then the backward conditional distribution may be expressed in terms of the filtering distribution.
 
@@ -264,7 +264,7 @@ If the future changepoints and their parameters, $\tilde{\theta}_{n}^+$, have al
 \qquad & \propto & p(\theta_{n}, \tilde{\theta}_{n}^+| y_{1:N}) \nonumber  \\
        & =       & \int p(x_n, \theta_{n}, \tilde{\theta}_{n}^+| y_{1:N}) dx_n \nonumber  \\
        & \propto & \int p(y_{n+1:N}|x_n, \theta_{n}, \tilde{\theta}_{n}^+, y_{1:n}) p(x_n, \theta_{n}, \tilde{\theta}_{n}^+| y_{1:n}) dx_n \nonumber \\
-       & = & \int p(y_{n+1:N}|x_n, \theta_{n}, \tilde{\theta}_{n}^+) p(x_n|\theta_{n}, y_{1:n}) dx_n \nonumber \\
+       & = & \int p(y_{n+1:N}|x_n, \tilde{\theta}_{n}^+) p(x_n|\theta_{n}, y_{1:n}) dx_n \nonumber \\
        &   & \times p(\tilde{\theta}_{n}^+|\theta_{n}) p(\theta_{n}|y_{1:n})
 \end{IEEEeqnarray}
 
@@ -277,7 +277,7 @@ Finally, the RBVRPF approximation is substituted for the filtering distribution.
 where the backwards conditional weights are given by
 
 \begin{IEEEeqnarray}{rCl}
- \tilde{w}_n & \propto & \int p(y_{n+1:N}|x_n, \theta_{n}^{(i)}, \tilde{\theta}_{n}^+) \nonumber \\
+ \tilde{w}_n & \propto & \int p(y_{n+1:N}|x_n, \tilde{\theta}_{n}^+) \nonumber \\
              &         & \times p(x_n|\theta_{n}^{(i)}, y_{1:n}) dx_n p(\tilde{\theta}_{n}^+|\theta_{n}^{(i)}) \label{eq:RBVRPS_back_cond_weight}
 \end{IEEEeqnarray}
 
@@ -290,10 +290,10 @@ The changepoint transition term $p(\tilde{\theta}_{n}^+|\theta_{n})$ may be expr
                                     &\propto& p(\tilde{u}_{K_n+1}|\tilde{\tau}_{K_n+1}, \tau_{K_n}, u_{K_n}) p(\tilde{\tau}_{K_n+1}|\tau_{K_n})   .
 \end{IEEEeqnarray}
 
-The state density in (\ref{eq:RBVRPS_back_cond_weight}) is the familiar Kalman filter estimate, given by $p(x_n|\theta_{n}^{(i)}, y_{1:n}) = \mathcal{N}(x_n|m_n^{(i)}, P_n^{(i)})$. The likelihood term, $p(y_{n+1:N}|x_n, \theta_{n}^{(i)}, \tilde{\theta}_{n}^+$, is an improper density over $x_n$, and may be calculated analytically using a backwards Kalman filter, in a similar manner to that used in the two-filter smoother \cite{Fraser1969,Anderson1979,Sarkka2012}. Such a backwards Kalman filter uses the following recursions. Details are provided in appendix~\ref{app:backward_filter}, and in the aforesaid references.
+The state density in (\ref{eq:RBVRPS_back_cond_weight}) is the familiar Kalman filter estimate, given by $p(x_n|\theta_{n}^{(i)}, y_{1:n}) = \mathcal{N}(x_n|m_n^{(i)}, P_n^{(i)})$. The likelihood term, $p(y_{n+1:N}|x_n, \tilde{\theta}_{n}^+)$, is an improper density over $x_n$, and may be calculated analytically using a backwards Kalman filter, in a similar manner to that used in the two-filter smoother \cite{Fraser1969,Anderson1979,Sarkka2012}. Such a backwards Kalman filter uses the following recursions. Details are provided in appendix~\ref{app:backward_filter}, and in the aforesaid references.
 
 \begin{equation}
- p(y_{n+1:N}|x_n, \theta_{n}^{(i)}, \tilde{\theta}_{n}^+) = Z_n \mathcal{N}(x_n|\tilde{m}_n, \tilde{P}_n)
+ p(y_{n+1:N}|x_n, \tilde{\theta}_{n}^+) = Z_n \mathcal{N}(x_n|\tilde{m}_n^-, \tilde{P}_n^-)
 \end{equation}
 
 \begin{IEEEeqnarray}{rCl}
@@ -313,7 +313,7 @@ Substituting into (\ref{eq:RBVRPS_back_cond_weight}), the backwards conditional 
 \label{eq:RBVRPS_back_cond_weight2}
 \end{equation}
 
-Samples of $\theta_{n}$ may be drawn from the particle distribution of \ref{eq:RBVRPS_back_cond}. Once sampling has progressed backwards from $n=N \dots 1$, a complete particle from the smoothing distribution will have been generated. This procedure may then be repeated until sufficient particles have been obtained. The procedure is summarised below in algorithm~\ref{alg:RBVRPS}.
+Using these weights, a sample of $\theta_{n}$ may be drawn from the particle distribution of (\ref{eq:RBVRPS_back_cond}). Once sampling has progressed backwards from $n=N \dots 1$, a complete particle from the smoothing distribution will have been generated. This procedure may then be repeated until sufficient particles have been obtained. The procedure is summarised in algorithm~\ref{alg:RBVRPS}.
 
 %\begin{algorithm}
 \begin{figure}
@@ -352,15 +352,29 @@ The latent state is a vector with two elements, the underlying value of the asse
  \mathbf{x}_n = [ x_n, \dot{x}_n]^T
 \end{equation}
 
-This evolves continuously according to a drift-diffusion model:
+This evolves continuously according to a jump-diffusion model:
 
 \begin{IEEEeqnarray}{c}
- d\mathbf{x}_t = \begin{bmatrix}0 & 1 \\ 0 & -\lambda \end{bmatrix} \mathbf{x}_t dt + \begin{bmatrix}0 \\ \sigma \end{bmatrix} d\mathbf{\beta}(t)
+ d\mathbf{x}_t = \begin{bmatrix}0 & 1 \\ 0 & -\lambda \end{bmatrix} \mathbf{x}_t dt + \begin{bmatrix}0 \\ \sigma \end{bmatrix} d\mathbf{\beta}(t) + d\mathbf{J}_t
 \end{IEEEeqnarray}
 
-where $\lambda$ introduces a mean regression effect on the trend and $\mathbf{\beta}(t)$ is standard Brownian motion (with unit diffusion constant).
+where $\lambda$ introduces a mean regression effect on the trend and $\mathbf{\beta}(t)$ is standard Brownian motion (with unit diffusion constant). The jump term, $d\mathbf{J}_t$, is zero everywhere except where jumps occur.
 
-In addition, the state experiences jumps at random times, $\{\tau_k\}$. Two types of jumps occur: value jumps, indicated by $u_k = 1$, and trend jumps, indicated by $u_k=2$. The magnitudes of jumps are zero-mean Gaussian-distributed with standard deviation $\sigma_{J1}$ and $\sigma_{J2}$ respectively. This model may be discretised at the observation times by matrix fraction decomposition (see e.g. \cite{Sarkka2006}\begin{meta}Not sure what to cite here. Simo's thesis? Or the references therein which I've never seen?\end{meta}). Assuming Gaussian observation noise with standard deviation $\sigma_y^2$, the resulting discrete time dynamics are described by the following equations (see \ref{app:model_discretisation}):
+\begin{IEEEeqnarray}{rCl}
+ d\mathbf{J}_t & = & \begin{cases} \mathbf{J}_k & t \in \{\tau_k\} \\ 0 & \text{elsewhere} \end{cases} \\
+ \mathbf{J}_k  & \sim & \mathcal{N}(\mathbf{J}_k| \mathbf{0}, Q_{J,u_k})
+\end{IEEEeqnarray}
+
+Jumps occur at a random set of times, $\{\tau_k\}$, and are one of two types: value jumps, indicated by $u_k = 1$, and trend jumps, indicated by $u_k=2$.
+
+The jump covariance matrices are,
+
+\begin{IEEEeqnarray}{c}
+Q_{J,u_k} = \begin{cases} \begin{bmatrix}\sigma_{J1}^2 & 0 \\ 0 & 0 \end{bmatrix} & u_k = 1 \\
+                          \begin{bmatrix}0 & 0 \\ 0 & \sigma_{J2}^2 \end{bmatrix} & u_k = 2  \end{cases}   .
+\end{IEEEeqnarray}
+
+This model may be discretised at the observation times by matrix fraction decomposition (see e.g. \cite{Sarkka2006}\begin{meta}Not sure what to cite here. Simo's thesis? Or the references therein which I've never seen?\end{meta}). Assuming Gaussian observation noise with standard deviation $\sigma_y^2$, the resulting discrete time dynamics are described by the following equations (see appendix \ref{app:model_discretisation}):
 
 \begin{IEEEeqnarray}{rCl}
  \mathbf{x}_n &=& A \mathbf{x}_{n-1} + \mathbf{w}_n \\
@@ -372,15 +386,12 @@ where the $\mathbf{w}_b$ and $v_n$ are Gaussian random variables with covariance
 \begin{IEEEeqnarray}{rCl}
  A               &=& \begin{bmatrix}1 & \frac{1}{\lambda}(1-e^{(-\lambda \Delta t)} \\ 0 & e^{(-\lambda \Delta t)}\end{bmatrix} \\
  C               &=& \begin{bmatrix}1 & 0\end{bmatrix} \\
- Q_n             &=& \begin{cases}Q_{\text{diff}} + Q_{\text{jump}} & \exists k : \tau_k \in [t_{n-1},t_n]\\
-                                  Q_{\text{diff}} & \text{otherwise} \end{cases} \\
- 																	Q_{\text{jump}} &=& \begin{cases} \begin{bmatrix}\sigma_{J1}^2 & 0 \\ 0 & 0 \end{bmatrix} & u_k = 1 \\
- 																	                                  \begin{bmatrix}0 & 0 \\ 0 & \sigma_{J2}^2 \end{bmatrix} & u_k = 2  \end{cases} \\
- %Q_{\text{diff}} &=& \begin{bmatrix}\sigma_1^2 T + \frac{\sigma_2^2}{2\lambda^2}(-3 + 2 \lambda T + 4 e^{(-\lambda T)} - e^{(-2 \lambda T)}) & \frac{\sigma_2^2}{2 \lambda^2} (1-e^{(-\lambda T)})^2 \\ \frac{\sigma_2^2}{2 \lambda^2} (1-e^{(-\lambda T)})^2 & \frac{\sigma_2^2}{2 \lambda} (1-e^{(-2 \lambda T)})\end{bmatrix} \IEEEeqnarraynumspace	\\
- Q_{\text{diff}} &=& \frac{\sigma^2}{2 \lambda}\begin{bmatrix} q1 & q2 \\ q2 & q3\end{bmatrix} \IEEEeqnarraynumspace	\\
- q1 & = & \frac{1}{\lambda^2}(2 \lambda \Delta t - (3 - e^{(-\lambda \Delta t)})(1 - e^{(-\lambda \Delta t)}) \\
- q2 & = & \frac{1}{\lambda} (1-e^{(-\lambda \Delta t)})^2 \\
- q3 & = & 1-e^{(-2 \lambda \Delta t)} \\
+ Q_n             &=& \begin{cases}Q_{D} + Q_{J,u_k} & \exists k : \tau_k \in [t_{n-1},t_n]\\
+                                  Q_{D} & \text{otherwise} \end{cases} \\
+ Q_{D} &=& \frac{\sigma^2}{2 \lambda}\begin{bmatrix} q_1 & q_2 \\ q_2 & q_3\end{bmatrix} \\
+ q_1 & = & \frac{1}{\lambda^2}(2 \lambda \Delta t - (3 - e^{(-\lambda \Delta t)})(1 - e^{(-\lambda \Delta t)}) \\
+ q_2 & = & \frac{1}{\lambda} (1-e^{(-\lambda \Delta t)})^2 \\
+ q_3 & = & 1-e^{(-2 \lambda \Delta t)} \\
  R               &=& [\sigma_y^2]
 \end{IEEEeqnarray}
 
@@ -583,7 +594,7 @@ Add a tracking application here, in which the changepoints mark manoeuvre start 
 
 
 \section{Conclusion}
-A new smoothing algorithm has been introduced for variable rate models which have linear-Gaussian system equations conditional on a set of unknown changepoint times. The algorithm employs the method of Rao-Blackwellisation, using a particle filter to estimate the nonlinear changepoint sequence, and Kalman filtering/smoothing methods to estimate the linear state components. The smoothing algorithm is shown to improve particle diversity and accuracy when compared to the filter.
+A new smoothing algorithm has been introduced for variable rate models which have linear-Gaussian dynamics conditional on a set of unknown changepoints. The algorithm employs Rao-Blackwellisation, using particle methods to estimate the nonlinear changepoint sequence, and Kalman filtering/smoothing to estimate the linear state components. The smoothing algorithm has been shown to improve particle diversity and accuracy when compared to the filter.
 
 
 
@@ -594,7 +605,52 @@ A new smoothing algorithm has been introduced for variable rate models which hav
 
 \appendices
 \section{Derivation of the Backwards Kalman Filter} \label{app:backward_filter}
-Appendix one text goes here.
+
+The RBVRPS weights require the calculation of the ``backwards filter'' term, $p(y_{n+1:N}|x_n, \tilde{\theta}_{n}^+)$, which may considered as an unnormalised density. For linear-Gaussian state dynamics, this may be calculated using the backwards Kalman filter recursions \cite{Fraser1969,Sarkka2012}. Assume that at time $t_{n+1}$ there is a Gaussian density such that,
+
+\begin{equation}
+ p(y_{n+1:N}|x_{n+1}, \tilde{\theta}_{n}^+) = \tilde{Z}_{n+1} \mathcal{N}(x_{n+1}|\tilde{m}_{n+1}, \tilde{P}_{n+1})  .
+\end{equation}
+
+The state transition model is linear-Gaussian, so the backwards predictive density is given by,
+
+\begin{IEEEeqnarray}{rCl}
+p(y_{n+1:N}|x_n, \tilde{\theta}_{n}^+) & = & \int p(y_{n+1:N}|x_{n+1}, \tilde{\theta}_{n}^+)  p(x_{n+1}|x_n, \tilde{\theta}_{n}^+) dx_{n+1} \\
+  & = & \int \tilde{Z}_{n+1} \mathcal{N}(x_{n+1}|\tilde{m}_{n+1}, \tilde{P}_{n+1}) \mathcal{N}(x_{n+1}|A_{n+1} x_{n}, Q_{n+1}) dx_{n+1} \\
+  & = & \int \tilde{Z}_{n+1} ||A_{n+1}^{-1}|| \mathcal{N}(x_{n+1}|\tilde{m}_{n+1}, \tilde{P}_{n+1}) \mathcal{N}(x_{n}|A_{n+1}^{-1} x_{n+1}, A_{n+1}^{-1} Q_{n+1} A_{n+1}^{-T}) dx_{n+1} \\
+  & = & \tilde{Z}_{n}^- \mathcal{N}(x_n|\tilde{m}_n^-, \tilde{P}_n^-)
+\end{IEEEeqnarray}
+
+where, 
+
+\begin{IEEEeqnarray}{rCl}
+ \tilde{m}_n^- & = & A_{n+1}^{-1} \tilde{m}_{n+1} \\
+ \tilde{P}_n^- & = & A_{n+1}^{-1} (\tilde{P}_{n+1} + Q_{n+1}) A_{n+1}^{-T} \\
+ \tilde{Z}_n^- & = & \tilde{Z}_{n+1} ||A_{n+1}^{-1}||   .
+\end{IEEEeqnarray}
+
+The update step simply involves multiplying by the likelihood of the observation at time $t_n$.
+
+\begin{IEEEeqnarray}{rCl}
+ p(y_{n:N}|x_n, \tilde{\theta}_{n}^+) & = & p(y_{n+1:N}|x_n, \tilde{\theta}_{n}^+) p(y_{n}|x_n, \tilde{\theta}_{n}^+) \\
+                                      & = & \tilde{Z}_n^- \mathcal{N}(x_n|\tilde{m}_n^-, \tilde{P}_n^-) \mathcal{N}(y_n|C_n x_n, R_n) \\
+                                      & = & \tilde{Z}_n \mathcal{N}(x_n|\tilde{m}_n, \tilde{P}_n)
+\end{IEEEeqnarray}
+
+where,
+
+\begin{IEEEeqnarray}{rCl}
+ \tilde{\mu}_n & = & C_n \tilde{m}_n^- \\
+ \tilde{S}_n   & = & C_n \tilde{P}_n^- C_n^T + R_n \\
+ \tilde{K}_n   & = & \tilde{P}_n^- C_n^T \tilde{S}_n^{-1} \\
+ \tilde{m}_n   & = & \tilde{m}_n^- + \tilde{K}_n (y_n - \tilde{\mu}_n) \\
+ \tilde{P}_n   & = & \tilde{P}_n^- - \tilde{K}_n \tilde{S}_n \tilde{K}_n^T \\
+ \tilde{Z}_n   & = & \tilde{Z}_n^- \mathcal{N}(y_n|\tilde{\mu}_n, \tilde{S}_n)   .
+\end{IEEEeqnarray}
+
+All steps use only standard Gaussian identities.
+
+
 
 \section{Model Discretisation} \label{app:model_discretisation}
 Appendix two text goes here.
